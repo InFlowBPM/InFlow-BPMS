@@ -1,0 +1,54 @@
+﻿@model strICT.InFlow.Web.Models.JobsViewModels.TaskParameter
+
+
+
+<tr>
+    <td>
+        @Model.Name
+
+        
+    </td>
+    <td>
+        @Html.HiddenFor(m => m.Name)
+        @if(Model.Type.Equals("boolean"))
+        {
+           
+                List<SelectListItem> listboolean = new List<SelectListItem>();
+                if(Model.Value.Value)
+                {
+                    listboolean.Add(new SelectListItem() { Selected = true, Text = "true", Value = "true" });
+                    listboolean.Add(new SelectListItem() { Selected = false, Text = "false", Value = "false" });
+                }
+                else
+                {
+                    listboolean.Add(new SelectListItem() { Selected = true, Text = "false", Value = "false" });
+                    listboolean.Add(new SelectListItem() { Selected = false, Text = "true", Value = "true" });
+                }    
+             
+             @Html.DropDownListFor(m => m.Value, listboolean, new { @class = "form-control", required = "required " })
+        }
+        else if(Model.Type.Equals("integer"))
+        {
+            @Html.TextBoxFor(m => m.Value, new { @class = "form-control", required = "required ", onkeypress = "validateinteger(event) " }) 
+        }
+        else if (Model.Type.Equals("number"))
+        {
+             @Html.TextBoxFor(m => m.Value, new { @class = "form-control", required = "required ", onkeypress = "validatenumber(event) " })
+        }
+        else if(Model.Type.Equals("string"))
+        { 
+            @Html.TextBoxFor(m => m.Value, new { @class = "form-control", required = "required " })
+        }
+        else if(Model.Type.Equals("bobasic"))
+        {
+            @*@Html.ActionLink("View", "Display", "BusinessObject", new { id = Model.Value.boi, taskId = ViewBag.TaskId }, new { target = "_blank", onclick = "return popup(this.href)" })
+        *@
+      <a href="#" class="btn btn-default" onclick="showBO('@Url.Action("BusinessObject", "BusinessObject", new { id = Model.Value.boi, taskId = ViewBag.TaskId })')">View</a>
+        }
+        else
+        {
+            @Html.Raw("Datatype " + Model.Type + " not supported")
+        }
+    </td>
+</tr>
+

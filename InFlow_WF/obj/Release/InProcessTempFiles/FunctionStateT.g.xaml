@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<local1:FunctionStateT xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:local="clr-namespace:strICT.InFlow.WF.Activities.Supporting;assembly=InFlow_WF" xmlns:local1="clr-namespace:strICT.InFlow.WF.Activities.SBPM;assembly=InFlow_WF" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <local1:FunctionStateT.Implementation>
+    <Sequence>
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+        <Variable x:TypeArguments="x:String" Name="GlobalWFId" />
+      </Sequence.Variables>
+      <local:GetWorkflowInstanceId>
+        <local:GetWorkflowInstanceId.GlobalWFId>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">GlobalWFId</mca:CSharpReference>
+          </OutArgument>
+        </local:GetWorkflowInstanceId.GlobalWFId>
+      </local:GetWorkflowInstanceId>
+      <p:GetConfigurationValue Name="cfgSQLConnectionString">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+      <TryCatch>
+        <TryCatch.Try>
+          <Parallel>
+            <Sequence>
+              <local1:FunctionState>
+                <local1:FunctionState.GlobalTransition>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">GlobalTransition</mca:CSharpReference>
+                  </OutArgument>
+                </local1:FunctionState.GlobalTransition>
+                <local1:FunctionState.GlobalVariables>
+                  <InOutArgument x:TypeArguments="p:DynamicValue">
+                    <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+                  </InOutArgument>
+                </local1:FunctionState.GlobalVariables>
+                <local1:FunctionState.OrderId>
+                  <InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.OrderId>
+                <local1:FunctionState.editableParameters>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">editableParameters</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.editableParameters>
+                <local1:FunctionState.isEndState>
+                  <InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">isEndState</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.isEndState>
+                <local1:FunctionState.name>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">name</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.name>
+                <local1:FunctionState.readableParameters>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">readableParameters</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.readableParameters>
+                <local1:FunctionState.transitions>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">transitions</mca:CSharpValue>
+                  </InArgument>
+                </local1:FunctionState.transitions>
+              </local1:FunctionState>
+              <If>
+                <If.Condition>
+                  <InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">TimeOut.Length &gt; 0</mca:CSharpValue>
+                  </InArgument>
+                </If.Condition>
+                <If.Then>
+                  <Sequence>
+                    <Throw>
+                      <InArgument x:TypeArguments="s:Exception">
+                        <mca:CSharpValue x:TypeArguments="s:Exception">new Exception("Done");</mca:CSharpValue>
+                      </InArgument>
+                    </Throw>
+                  </Sequence>
+                </If.Then>
+              </If>
+            </Sequence>
+            <Sequence>
+              <If>
+                <If.Condition>
+                  <InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">TimeOut.Length &gt; 0</mca:CSharpValue>
+                  </InArgument>
+                </If.Condition>
+                <If.Then>
+                  <Sequence>
+                    <Delay>
+                      <InArgument x:TypeArguments="x:TimeSpan">
+                        <mca:CSharpValue x:TypeArguments="x:TimeSpan">TimeSpan.Parse(TimeOut)</mca:CSharpValue>
+                      </InArgument>
+                    </Delay>
+                    <local:markTaskAsTimedOut>
+                      <local:markTaskAsTimedOut.OrderId>
+                        <InArgument x:TypeArguments="x:Int32">
+                          <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+                        </InArgument>
+                      </local:markTaskAsTimedOut.OrderId>
+                      <local:markTaskAsTimedOut.cfgSQLConnectionString>
+                        <InOutArgument x:TypeArguments="x:String">
+                          <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+                        </InOutArgument>
+                      </local:markTaskAsTimedOut.cfgSQLConnectionString>
+                      <local:markTaskAsTimedOut.globalWFId>
+                        <InArgument x:TypeArguments="x:String">
+                          <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+                        </InArgument>
+                      </local:markTaskAsTimedOut.globalWFId>
+                    </local:markTaskAsTimedOut>
+                    <Throw>
+                      <InArgument x:TypeArguments="s:Exception">
+                        <mca:CSharpValue x:TypeArguments="s:Exception">new Exception("TimeOut");</mca:CSharpValue>
+                      </InArgument>
+                    </Throw>
+                  </Sequence>
+                </If.Then>
+              </If>
+            </Sequence>
+          </Parallel>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception">
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+              <If>
+                <If.Condition>
+                  <InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">exception.Message.Equals("TimeOut")</mca:CSharpValue>
+                  </InArgument>
+                </If.Condition>
+                <If.Then>
+                  <Assign>
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">
+                        <mca:CSharpReference x:TypeArguments="x:String">GlobalTransition</mca:CSharpReference>
+                      </OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">TimeOut!</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </If.Then>
+              </If>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+      <sads:DebugSymbol.Symbol>d1BEOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19XRlxBY3Rpdml0aWVzXFNCUE1cRnVuY3Rpb25TdGF0ZVQueGFtbCc/A9kBDgIBAUQFSiMDAfkBSwVRHwMB7AFSBdcBEAIBAkcLR1sDAfoBTgtOZwMB7QFUCbkBFAIBIMEBDdMBEgIBA1ULkAEWAgFvkQELuAEWAgEhxAETxAF1AgEEyAER0QEaAgERVg1/JAMBiwGAAQ2PARICAXCSAQ23ARICASLPATzPAUQCAR/LARfLAW0CARJZE1lpAwHgAXwTfFwDAdQBXhNebgMByAF3E3djAwG8AWMTY1cDAbABbRNtXAMBpAFoE2hjAwGYAXITclUDAYwBgwETgwFnAgFxhwERjQEcAgF9lQETlQFnAgEjmQERtQEcAgEviAETjAEbAgF+mgETngEbAgFinwETrwEuAgE9sAETtAEbAgEwigEXigFuAgF/nAEXnAFuAgFjpwEZpwF1AgFWrAEZrAFhAgFKogEZogFdAgE+sgEXsgFxAgEx</sads:DebugSymbol.Symbol>
+    </Sequence>
+  </local1:FunctionStateT.Implementation>
+</local1:FunctionStateT>

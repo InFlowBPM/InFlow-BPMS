@@ -1,0 +1,55 @@
+﻿@model strICT.InFlow.Web.Models.ViewBOModel
+<div id="bocontainer">
+
+    @if (Model.BObjectErrors != null)
+    {
+        <p><b>Validation Errors:</b></p>
+        <ul>
+
+
+            @foreach (var i in Model.BObjectErrors)
+            {
+                <li>@i</li>
+            }
+        </ul>
+
+        <hr />
+    }
+
+    @using (Html.BeginForm("SubmitBusinessObject", "ManageBOs", new { id = Model.BObjectIdentifier, taskId = ViewBag.TaskId }, FormMethod.Post, new { }))
+    {
+        <div id="bocontainer">
+            @Html.Raw(Model.ViewData)
+
+            <br />
+            <input type="button" value="Submit" onclick="DoAjaxPostAndMore(this)" class="btn btn-default" />
+        </div>
+    }
+
+    <script type="text/javascript">
+
+ function validatenumber(evt) {
+     var theEvent = evt || window.event;
+     var key = theEvent.keyCode || theEvent.which;
+     key = String.fromCharCode(key);
+     var regex = /[0-9]|\.|\,/;
+     if (!regex.test(key)) {
+         theEvent.returnValue = false;
+         if (theEvent.preventDefault) theEvent.preventDefault();
+     }
+ }
+
+    function validateinteger(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    </script>
+
+</div>

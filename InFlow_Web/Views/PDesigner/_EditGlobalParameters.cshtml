@@ -1,0 +1,60 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_GlobalParameters_ViewModel
+
+@Html.AntiForgeryToken()
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Global Parameters</div>
+    <div class="panel-body">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PD_Subject_Id)
+        @Html.HiddenFor(model => model.PD_Process_Id)
+
+        <table class="table table-striped">
+            <tr>
+                <td>Parameter</td>
+                <td>Type</td>
+                <td>DefaultValue</td>
+                <td></td>
+            </tr>
+            @foreach (var i in Model.Parameters)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.Type</td>
+                    <td>@i.DefaultValue</td>
+                    <td>
+                        @if (ViewBag.Edit == 1)
+                        {
+                            @Ajax.ActionLink(" ", "_EditParameter", new { processid = Model.PD_Process_Id, subjectid = Model.PD_Subject_Id, parameter = i.Name, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                          , new { @class = "glyphicon glyphicon-pencil", @title = "edit parameter" })
+
+                            @Ajax.ActionLink(" ", "_DeleteParameter", new { processid = Model.PD_Process_Id, subjectid = Model.PD_Subject_Id, parameter = i.Name },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                       , new { @class = "glyphicon glyphicon-minus", @title = "remove parameter" })
+
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="panel-footer text-right">
+            <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels.BPMNImportViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">Import BPMN</div>
+    <div class="panel-body">
+        <p>The input must be a .zip file which includes processes in the standardized BPMN format, modelled with our speficiations.</p>
+        <p>For more information see <a href="~/Content/S-BPM_in_BPMN.pdf" target="_blank">here (PDF)</a></p>
+        @using (Html.BeginForm("ImportBPMN", "Project", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data"  }))
+        {
+
+          
+
+            @Html.ValidationSummary(true)
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => Model.folder, new { @class = "col-md-3 control-label" })
+
+        @Html.DropDownListFor(m => m.folderId, Model.folder, new { @class = "form-control" })
+
+    </div>
+
+  
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => Model.zipfile, new { @class = "col-md-3 control-label" })
+
+        <input type="file" name="zipfile" class="form-control" />
+    </div>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-default">Import</button>
+                @Html.ActionLink("Cancel", "Index", new { id = -1}, new { @class = "btn btn-default" })
+            </div>
+
+        }
+    </div>
+</div>

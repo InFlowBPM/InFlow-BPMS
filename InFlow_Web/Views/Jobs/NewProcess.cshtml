@@ -1,0 +1,20 @@
+﻿@model System.Collections.Generic.List<strICT.InFlow.Web.Models.JobsViewModels.StartProcessItemViewModel>
+
+@{
+    ViewBag.Title = "NewProcess";
+}
+
+<div class="page-header"> <h1><small>My Jobs</small><br />Start new process<br /></h1></div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                @Html.ActionLink(item.Name + " (v." + item.Version + ")", "NewProcess", new { id = item.Id }, new { @class = "list-group-item" })
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,2 @@
+FunctionState.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

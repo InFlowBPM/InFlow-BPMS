@@ -1,0 +1,34 @@
+﻿@model strICT.InFlow.Web.Models.BOD_Item_Model
+
+
+@using (Html.BeginForm("ItemDetail", "ManageBOs", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.boid)
+    @Html.HiddenFor(model => model.ParentId)
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Edit Property</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>@Html.DropDownListFor(m => m.Type_String, Model.Types, new { @class = "form-control" })</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer text-right">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+
+
+}
+

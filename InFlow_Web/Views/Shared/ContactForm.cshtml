@@ -1,0 +1,49 @@
+﻿@model strICT.InFlow.Web.Models.ContactViewModel
+<h2>Sign up for a free trial!</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Fill out this form to apply for a free trial version of our software. </h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Contact","Contact",FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
+                {
+
+                    @Html.ValidationSummary(true)
+                    <fieldset>
+                        <div class="form-group" style="margin-left:5px;">
+                           Your E-Mail*
+                            @Html.TextBoxFor(model => model.Mail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Mail)
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            Your Name*
+
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            Your Company or Organization*
+
+                            @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Company)
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            Your Promotion Code 
+
+                            @Html.TextBoxFor(model => model.PromoCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PromoCode)
+                        </div>
+                        <small>* - required field</small>
+                        <p>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </p>
+                    </fieldset>
+                }
+            </div>
+        </div>
+        </div>
+  
+</div>

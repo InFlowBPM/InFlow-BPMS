@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<this:MessageTier xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:siwa="clr-namespace:strICT.InFlow.WFM.Activities;assembly=InFlow_WFM" xmlns:this="clr-namespace:strICT.InFlow.Workflows;assembly=InFlow_Workflows" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <this:MessageTier.Type>
+    <InArgument x:TypeArguments="x:String">
+      <Literal x:TypeArguments="x:String" Value="" />
+    </InArgument>
+  </this:MessageTier.Type>
+  <this:MessageTier.SenderId>
+    <InArgument x:TypeArguments="x:String">
+      <Literal x:TypeArguments="x:String" Value="" />
+    </InArgument>
+  </this:MessageTier.SenderId>
+  <this:MessageTier.RecipientSubject>
+    <InArgument x:TypeArguments="x:String">
+      <Literal x:TypeArguments="x:String" Value="" />
+    </InArgument>
+  </this:MessageTier.RecipientSubject>
+  <this:MessageTier.RecipientUsername>
+    <InArgument x:TypeArguments="x:String">
+      <Literal x:TypeArguments="x:String" Value="" />
+    </InArgument>
+  </this:MessageTier.RecipientUsername>
+  <this:MessageTier.Data>
+    <InArgument x:TypeArguments="x:String">
+      <Literal x:TypeArguments="x:String" Value="" />
+    </InArgument>
+  </this:MessageTier.Data>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_WFM</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_Workflows</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <this:MessageTier.Implementation>
+    <Flowchart DisplayName="Message-Handler">
+      <Flowchart.Variables>
+        <Variable x:TypeArguments="x:String" Name="GlobalProcessName">
+          <Variable.Default>
+            <Literal x:TypeArguments="x:String" Value="" />
+          </Variable.Default>
+        </Variable>
+        <Variable x:TypeArguments="x:String" Default="-1" Name="ProcessInstanceId" />
+        <Variable x:TypeArguments="x:String" Name="SenderSubject">
+          <Variable.Default>
+            <Literal x:TypeArguments="x:String" Value="" />
+          </Variable.Default>
+        </Variable>
+        <Variable x:TypeArguments="x:String" Name="SenderUsername">
+          <Variable.Default>
+            <Literal x:TypeArguments="x:String" Value="" />
+          </Variable.Default>
+        </Variable>
+        <Variable x:TypeArguments="x:String" Name="RecipientId">
+          <Variable.Default>
+            <Literal x:TypeArguments="x:String" Value="" />
+          </Variable.Default>
+        </Variable>
+        <Variable x:TypeArguments="x:Int32" Name="localRecipientProcessSubjectId" />
+        <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMBaseAddress" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMUsername" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMPassword" />
+        <Variable x:TypeArguments="x:Int32" Name="Recipient_Role_ID" />
+        <Variable x:TypeArguments="x:Int32" Name="MessageId" />
+      </Flowchart.Variables>
+      <Flowchart.StartNode>
+        <FlowStep x:Name="__ReferenceID4">
+          <Sequence DisplayName="Initialize">
+            <p:GetConfigurationValue Name="cfgSQLConnectionString">
+              <p:GetConfigurationValue.Result>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+                </OutArgument>
+              </p:GetConfigurationValue.Result>
+            </p:GetConfigurationValue>
+            <p:GetConfigurationValue Name="cfgWFMBaseAddress">
+              <p:GetConfigurationValue.Result>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">cfgWFMBaseAddress</mca:CSharpReference>
+                </OutArgument>
+              </p:GetConfigurationValue.Result>
+            </p:GetConfigurationValue>
+            <p:GetConfigurationValue Name="cfgWFMUsername">
+              <p:GetConfigurationValue.Result>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpReference>
+                </OutArgument>
+              </p:GetConfigurationValue.Result>
+            </p:GetConfigurationValue>
+            <p:GetConfigurationValue Name="cfgWFMPassword">
+              <p:GetConfigurationValue.Result>
+                <OutArgument x:TypeArguments="x:String">
+                  <mca:CSharpReference x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpReference>
+                </OutArgument>
+              </p:GetConfigurationValue.Result>
+            </p:GetConfigurationValue>
+          </Sequence>
+          <FlowStep.Next>
+            <FlowStep x:Name="__ReferenceID1">
+              <siwa:UpdateMessage IsMessageForExternalSubject="{x:Null}">
+                <siwa:UpdateMessage.GlobalProcessName>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">GlobalProcessName</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.GlobalProcessName>
+                <siwa:UpdateMessage.ProcessInstanceId>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">ProcessInstanceId</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.ProcessInstanceId>
+                <siwa:UpdateMessage.RecipientId>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">RecipientId</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.RecipientId>
+                <siwa:UpdateMessage.RecipientProcessSubjectId>
+                  <OutArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">localRecipientProcessSubjectId</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.RecipientProcessSubjectId>
+                <siwa:UpdateMessage.RecipientSubject>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">RecipientSubject</mca:CSharpValue>
+                  </InArgument>
+                </siwa:UpdateMessage.RecipientSubject>
+                <siwa:UpdateMessage.RecipientUsername>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">RecipientUsername</mca:CSharpValue>
+                  </InArgument>
+                </siwa:UpdateMessage.RecipientUsername>
+                <siwa:UpdateMessage.Recipient_Role_Id>
+                  <OutArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpReference x:TypeArguments="x:Int32">Recipient_Role_ID</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.Recipient_Role_Id>
+                <siwa:UpdateMessage.SenderId>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">SenderId</mca:CSharpValue>
+                  </InArgument>
+                </siwa:UpdateMessage.SenderId>
+                <siwa:UpdateMessage.SenderSubject>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">SenderSubject</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.SenderSubject>
+                <siwa:UpdateMessage.SenderUsername>
+                  <OutArgument x:TypeArguments="x:String">
+                    <mca:CSharpReference x:TypeArguments="x:String">SenderUsername</mca:CSharpReference>
+                  </OutArgument>
+                </siwa:UpdateMessage.SenderUsername>
+                <siwa:UpdateMessage.cfgSQLConnectionString>
+                  <InArgument x:TypeArguments="x:String">
+                    <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+                  </InArgument>
+                </siwa:UpdateMessage.cfgSQLConnectionString>
+              </siwa:UpdateMessage>
+              <FlowStep.Next>
+                <FlowDecision x:Name="__ReferenceID2" DisplayName="Recipient Instance Exists?">
+                  <FlowDecision.Condition>
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">RecipientId.Length &gt; 0</mca:CSharpValue>
+                  </FlowDecision.Condition>
+                  <FlowDecision.True>
+                    <FlowStep x:Name="__ReferenceID0">
+                      <siwa:StoreMessage>
+                        <siwa:StoreMessage.Data>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">Data</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.Data>
+                        <siwa:StoreMessage.GlobalProcessName>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">GlobalProcessName</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.GlobalProcessName>
+                        <siwa:StoreMessage.MessageId>
+                          <OutArgument x:TypeArguments="x:Int32">
+                            <mca:CSharpReference x:TypeArguments="x:Int32">MessageId</mca:CSharpReference>
+                          </OutArgument>
+                        </siwa:StoreMessage.MessageId>
+                        <siwa:StoreMessage.ProcessInstanceId>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">ProcessInstanceId</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.ProcessInstanceId>
+                        <siwa:StoreMessage.RecipientId>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">RecipientId</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.RecipientId>
+                        <siwa:StoreMessage.RecipientSubject>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">RecipientSubject</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.RecipientSubject>
+                        <siwa:StoreMessage.RecipientUsername>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">RecipientUsername</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.RecipientUsername>
+                        <siwa:StoreMessage.Recipient_Role_Id>
+                          <InArgument x:TypeArguments="x:Int32">
+                            <mca:CSharpValue x:TypeArguments="x:Int32">Recipient_Role_ID</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.Recipient_Role_Id>
+                        <siwa:StoreMessage.SenderId>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">SenderId</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.SenderId>
+                        <siwa:StoreMessage.SenderSubject>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">SenderSubject</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.SenderSubject>
+                        <siwa:StoreMessage.SenderUsername>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">SenderUsername</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.SenderUsername>
+                        <siwa:StoreMessage.Type>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">Type</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.Type>
+                        <siwa:StoreMessage.cfgSQLConnectionString>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StoreMessage.cfgSQLConnectionString>
+                      </siwa:StoreMessage>
+                      <FlowStep.Next>
+                        <FlowStep x:Name="__ReferenceID5">
+                          <siwa:CreateEmailNotificationForMessage>
+                            <siwa:CreateEmailNotificationForMessage.MessageId>
+                              <InArgument x:TypeArguments="x:Int32">
+                                <mca:CSharpValue x:TypeArguments="x:Int32">MessageId</mca:CSharpValue>
+                              </InArgument>
+                            </siwa:CreateEmailNotificationForMessage.MessageId>
+                            <siwa:CreateEmailNotificationForMessage.cfgSQLConnectionString>
+                              <InArgument x:TypeArguments="x:String">
+                                <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+                              </InArgument>
+                            </siwa:CreateEmailNotificationForMessage.cfgSQLConnectionString>
+                          </siwa:CreateEmailNotificationForMessage>
+                        </FlowStep>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowDecision.True>
+                  <FlowDecision.False>
+                    <FlowStep x:Name="__ReferenceID3">
+                      <siwa:StartWorkflowInstance>
+                        <siwa:StartWorkflowInstance.NewProcessId>
+                          <OutArgument x:TypeArguments="x:String">
+                            <mca:CSharpReference x:TypeArguments="x:String">RecipientId</mca:CSharpReference>
+                          </OutArgument>
+                        </siwa:StartWorkflowInstance.NewProcessId>
+                        <siwa:StartWorkflowInstance.Owner>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">RecipientUsername</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.Owner>
+                        <siwa:StartWorkflowInstance.ProcessInstanceId>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">ProcessInstanceId</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.ProcessInstanceId>
+                        <siwa:StartWorkflowInstance.ProcessSubjectId>
+                          <InArgument x:TypeArguments="x:Int32">
+                            <mca:CSharpValue x:TypeArguments="x:Int32">localRecipientProcessSubjectId</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.ProcessSubjectId>
+                        <siwa:StartWorkflowInstance.cfgSQLConnectionString>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.cfgSQLConnectionString>
+                        <siwa:StartWorkflowInstance.cfgWFMBaseAddress>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMBaseAddress</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.cfgWFMBaseAddress>
+                        <siwa:StartWorkflowInstance.cfgWFMPassword>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.cfgWFMPassword>
+                        <siwa:StartWorkflowInstance.cfgWFMUsername>
+                          <InArgument x:TypeArguments="x:String">
+                            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpValue>
+                          </InArgument>
+                        </siwa:StartWorkflowInstance.cfgWFMUsername>
+                      </siwa:StartWorkflowInstance>
+                      <FlowStep.Next>
+                        <x:Reference>__ReferenceID0</x:Reference>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowDecision.False>
+                </FlowDecision>
+              </FlowStep.Next>
+            </FlowStep>
+          </FlowStep.Next>
+        </FlowStep>
+      </Flowchart.StartNode>
+      <x:Reference>__ReferenceID0</x:Reference>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
+      <x:Reference>__ReferenceID3</x:Reference>
+      <x:Reference>__ReferenceID4</x:Reference>
+      <x:Reference>__ReferenceID5</x:Reference>
+      <sads:DebugSymbol.Symbol>d0REOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19Xb3JrZmxvd3NcTWVzc2FnZVRpZXIueGFtbDsdBx02AQYiByI2AQUsByw2AQQYBxg2AQMnByc2AQJPA+UCDwIBAVMLUzoCAQZWNFY4AgEFWQtZOgIBBF4LXjoCAQNjC2M6AgECcAmNARQDAYEFkAENyAEiAwG6A8wBE8wBawMBqAOpAhXSAjIDAZcC0AEVkgIpAgEslQIZoQJCAgEHcQt3JQMBuwV4C34lAwGoBX8LhQElAwGVBYYBC4wBJQMBggWdAROdAWQDAe8ExQETxQFnAwHdBLYBE7YBWQMBywSnAROnAWEDAbkEwAETwAFnAwGnBLEBE7EBaQMBlQSiAROiAXYDAYMErAETrAFiAwHxA5MBE5MBagMB3wOYAROYAWoDAc0DuwETuwFmAwG7A8oCG8oCZwMBlgPAAhvAAm8DAYQDrAIbrAJsAwHyAs8CG88CZwMB4AKxAhuxAmoDAc4CxQIbxQJqAwG8ArYCG7YCagMBqgK7Ahu7AnYDAZgC5wEb5wFkAwGFAo8CG48CbwMB8wH7ARv7AWEDAeEB7AEb7AFpAwHPAYUCG4UCZwMBvQHTARvTAV0DAasB9gEb9gFpAwGZAYoCG4oCXQMBhwHdARvdAWkCAXXxARvxAWoCAWPYARvYAWoCAVHiARviAWoCAT+AAhuAAmYCAS2dAh+dAnMCARqYAh+YAmUCAQh0EXRtAwG8BXsRe2gDAakFggERggFlAwGWBYkBEYkBZQMBgwU=</sads:DebugSymbol.Symbol>
+    </Flowchart>
+  </this:MessageTier.Implementation>
+</this:MessageTier>

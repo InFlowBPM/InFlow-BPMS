@@ -1,0 +1,10 @@
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\InFlow_Designer.dll.config
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\InFlow_Designer.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\InFlow_Designer.pdb
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\EntityFramework.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\EntityFramework.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\obj\Debug\InFlow_Designer.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\obj\Debug\InFlow_Designer.pdb
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\obj\Debug\InFlow_Designer.csprojResolveAssemblyReference.cache

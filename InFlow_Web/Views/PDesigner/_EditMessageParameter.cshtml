@@ -1,0 +1,163 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_MessageParameter_ViewModel
+
+@using (Html.BeginForm("_EditMessageParameter", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="panel panel-primary">
+    <div class="panel-heading">Edit Parameter</div>
+    <div class="panel-body">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor( m => Model.Process_Id)
+        @Html.HiddenFor(m => Model.Message_Type_Id)
+        @Html.HiddenFor(m => Model.previousName)
+        @Html.HiddenFor(m => Model.messageName)
+        <table class="table table-striped">
+            <tr>
+                <td>
+                    Name                    
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "newName" })
+                </td>               
+            </tr>
+            <tr>
+                <td>
+                    Type
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Type, Model.AvailableTypes, new { @class = "form-control", @id = "typeList" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Default Value
+                </td>
+                <td>
+                    @if (Model.Type == "bobasic")
+                    {
+                        @* @Html.TextBoxFor(m => Model.DefaultValue, new { @class = "form-control", @id = "defaultString", @style = "display:none" })*@
+                        <div id="parametereditor" style="display:none"> </div>
+
+                        @Html.DropDownListFor(m => m.SelectedBO, Model.AvailableBOs, new { @class = "form-control", @id = "defaultBO", @style = "display:block" })
+                    }
+                    else
+                    {
+                        @* @Html.TextBoxFor(m => Model.DefaultValue, new { @class = "form-control", @id = "defaultString", @style = "display:block" })*@
+                        <div id="parametereditor" style="display:block">
+                           @{
+                        Dictionary<string, string> partialmodel = new Dictionary<string, string>();
+                        partialmodel.Add("type", Model.Type);
+                        partialmodel.Add("value", Model.DefaultValue);
+                            }
+
+                            @Html.Partial("_GetParameterValueEditor", partialmodel)
+
+                        </div>
+
+                        @Html.DropDownListFor(m => m.SelectedBO, Model.AvailableBOs, new { @class = "form-control", @id = "defaultBO", @style = "display:none" })
+                    }
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer text-right" id="change">
+            @Ajax.ActionLink("Back", "_EditMessageType", new { processid = Model.Process_Id, id = Model.Message_Type_Id, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                               , new { @class = "btn btn-warning" })
+            @if (ViewBag.Edit == 1)
+            {
+                @*<input type="submit" value="Save" class="btn btn-success"/>*@
+                <input type="button" value="Save" onclick="replace()" class="btn btn-success" />
+            }
+        </div>
+
+
+ <script type="text/javascript">
+
+    function checkTypeNow(type) {
+        if (type == "bobasic") {
+            document.getElementById('parametereditor').style.display = 'none';
+            document.getElementById('defaultBO').style.display = 'block';
+        }
+        else {
+            // document.getElementById('parametereditor').innerHTML = '<p> abc </p>';
+            actionstring = '@Url.Action("_GetParameterValueEditor")' + '?type=' + type
+            if (type == 'boolean')
+                actionstring = actionstring + '&value=True'
+            else
+                actionstring = actionstring + '&value=0'
+
+            $.ajax({
+                type: "GET",
+                url: actionstring,
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    alert("errro");
+                },
+                success: function (response) {
+                    //do something with response
+                    //$('#myModal').modal('hide');
+                    // $('#bocontainer').replaceWith(response)
+                    document.getElementById('parametereditor').innerHTML = response;
+
+                }
+            });
+
+            document.getElementById('parametereditor').style.display = 'block';
+            document.getElementById('defaultBO').style.display = 'none';
+        }
+    }
+
+
+    $('select#typeList').change(function () {
+        checkTypeNow($(this).val());
+    })
+
+    var EMP = '@Ajax.ActionLink("Save", "_EditMessageParameterNoSubmit", new { processid = Model.Process_Id, Name = "newName", previousName = Model.previousName, messageTypeId = Model.Message_Type_Id, defaultv = "newDefault", Type = "newType", messageName = Model.messageName, ft = true }, new AjaxOptions { UpdateTargetId = "pdesignerconfig", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-success", @style = "display:none", @id = "probaclick" })';
+    function replace() {
+        EMP = EMP.replace("newName", document.getElementById('newName').value);
+        EMP = EMP.replace("newType", document.getElementById('typeList').value);
+        if (document.getElementById('typeList').value == "bobasic")
+        {
+            var e = document.getElementById('defaultBO');
+            //var eSel = e.options[e.selectedIndex].text;
+            var eSel = e.options[e.selectedIndex].value;
+            var dv = "{\"bo\": " + eSel + ",  \"boi\": -1}";
+            EMP = EMP.replace("newDefault", eSel);
+        } else {
+            EMP = EMP.replace("newDefault", document.getElementById('DefaultValue').value);
+        }
+        //$("#change").append(EMP);
+        //$("#change").html(EMP);
+        var element = null;
+        element = document.getElementById("probaclick");
+        if (element == null) $("#change").append(EMP);
+        $('#probaclick').click();
+    }
+
+    var EMP2 = '@Ajax.ActionLink("Save", "_EditMessageParameterNoSubmit", new { processid = Model.Process_Id, Name = "newName", previousName = Model.previousName, messageTypeId = Model.Message_Type_Id, defaultv = "newDefault", Type = "newType", messageName = Model.messageName, ft = false }, new AjaxOptions { UpdateTargetId = "pdesignerconfig", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-success", @style = "display:none", @id = "probaclick2" })';
+    function replace2() {
+        EMP2 = EMP2.replace("newName", document.getElementById('newName').value);
+        EMP2 = EMP2.replace("newType", document.getElementById('typeList').value);
+        if (document.getElementById('typeList').value == "bobasic") {
+            var e = document.getElementById('defaultBO');
+            var eSel = e.options[e.selectedIndex].value;
+            var dv = "{\"bo\": " + eSel + ",  \"boi\": -1}";
+            EMP2 = EMP2.replace("newDefault", eSel);
+        } else {
+            EMP2 = EMP2.replace("newDefault", document.getElementById('DefaultValue').value);
+        }
+        var element = null;
+        element = document.getElementById("probaclick2");
+        if (element == null) $("#change").append(EMP2);
+        $('#probaclick2').click();
+    }
+
+  </script>
+
+    </div>
+</div>
+}

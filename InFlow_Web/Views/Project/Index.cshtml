@@ -1,0 +1,34 @@
+﻿@model strICT.InFlow.Db.Contracts.InFlow.WS_Project
+
+@{
+
+    
+    ViewBag.Title = "Project Administration";
+    var _db = new strICT.InFlow.Db.DataContexts.InFlowDb();
+}
+
+<div class="page-header"> <h1>Project Administration</h1></div>
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.Partial("_FolderList")
+    </div>
+    <div class="col-md-8" id="pworkspace">
+        @if (ViewBag.Id > 0)
+        {
+       
+            @Html.Action("_ProjectWorkspace", new { projectId = ViewBag.Id });
+            
+        }
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

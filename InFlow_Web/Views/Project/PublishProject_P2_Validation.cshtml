@@ -1,0 +1,77 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels.PublishProjectP2ValidateViewModel
+@{
+    ViewBag.Title = "Publish Project";
+}
+
+<div class="page-header"> <h1><small>Project Administration</small><br />Publish @Model.ProjectName</h1></div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class=@if (Model.Success)
+                {
+                @Html.Raw("\"panel panel-success\"")
+                }
+               else
+               {
+                @Html.Raw("\"panel panel-danger\"")
+               }>
+            <div class="panel-heading">
+                Step 2/3: Model Validation Report
+            </div>
+            <div class="panel-body">
+                @if (Model.Success)
+                {
+                    <ul><li>Model Validation successful!</li></ul>
+                }
+                else
+                {
+                    <ul><li>Model Validation failed!</li></ul>
+                }
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Version)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.Version)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.SubjectsCreated)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(model => model.SubjectsCreated)
+                        </td>
+                    </tr>
+                </table>
+                @if (!Model.Success)
+                {
+                    <b>Validation Errors:</b>
+                    <table class="table table-striped">
+                        @foreach (var item in Model.ValidationErrors)
+                        {
+                            <tr>
+                                <td>@item.Item</td>
+                                <td>@item.Description</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>
+            <div class="panel-footer text-right">
+                @if (Model.Success)
+                {
+                    @Html.ActionLink("Next", "PublishProject_P3_Roles", new { projectId = Model.ProjectId }, new { @class = "btn btn-default" })
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

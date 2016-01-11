@@ -1,0 +1,52 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels.PublishProjectP3ViewModel
+@{
+    ViewBag.Title = "Publish Project";
+}
+
+<div class="page-header"> <h1><small>Project Administration</small><br />Publish @Model.ProjectName</h1></div>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("PublishProject_P3_Roles", "Project", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Step 3/3: Process Configuration
+                </div>
+                <div class="panel-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @Html.HiddenFor(m => Model.Id)
+                    @Html.HiddenFor(m => Model.Version)
+
+                    <ul>
+                        <li>Add additional Information to the published Process</li>
+                    </ul>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>@Html.LabelFor(model => Model.ProcessInfo, new { @class = "col-md-2 control-label" })</td>
+                            <td>@Html.TextBoxFor(model => Model.ProcessInfo, new { @class = "form-control" })</td>
+                        </tr>
+                    </table>
+                    <ul>
+                        <li>Choose a Role for each Subject</li>
+                    </ul>
+                    <table class="table table-striped">
+                        @Html.EditorFor(model => model.Subjects)
+                    </table>
+                </div>
+                <div class="panel-footer text-right">
+                    <input type="submit" class="btn btn-default" value="Publish Process to Server" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

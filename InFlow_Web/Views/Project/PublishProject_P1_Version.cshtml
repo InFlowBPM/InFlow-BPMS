@@ -1,0 +1,45 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels.PublishProjectP1ViewModel
+@{
+    ViewBag.Title = "Publish Project";
+}
+
+<div class="page-header"> <h1><small>Project Administration</small><br/>Publish @Model.ProjectName</h1></div>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("PublishProject_P1_Version", "Project", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Step 1/3: Model Version
+                </div>
+                <div class="panel-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    @Html.HiddenFor(model => Model.Id)
+
+                    <ul>
+                        <li>Select the Version of the Project</li>
+                    </ul>
+
+                    <table class="table table-striped">
+                        <tr>
+                            <td> @Html.Label("Version", new { @class = "col-md-2 control-label" })</td>
+                            <td>  @Html.DropDownListFor(model => model.SelectedVersion, Model.Versions, new { @class = "form-control" })</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer text-right">
+                    <input type="submit" class="btn btn-default" value="Next" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

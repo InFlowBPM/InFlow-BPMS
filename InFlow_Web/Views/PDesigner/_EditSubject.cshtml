@@ -1,0 +1,56 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_Subject_ViewModel
+
+@using (Html.BeginForm("_EditSubject", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Subject @Model.Name</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            <table class="table table-striped">
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.TextBoxFor(model => model.Name, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>MultiSubject</td>
+                    <td>@Html.EditorFor(model => model.MultiSubject, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>ExternalSubject</td>
+                    <td>@Html.EditorFor(model => model.ExternalSubject, new { @class = "form-control" })</td>
+                </tr>
+                @if (Model.ExternalSubject) { 
+                <tr><td>Source</td><td>
+                    <select class="form-control" id="ExternalSubjectSources">
+                 
+                        @foreach (var x in Model.ExternalSources)
+                        {
+                            <option value="@x.SubjectId" @(Model.ExternalSubjectSource != null && x.SubjectId == Model.ExternalSubjectSource.SubjectId ? "selected" : "")>@x.Name</option>
+                        }
+                    </select>                                                                                         
+                    
+                    </td></tr>
+                }
+                <tr>
+                   
+                    <td>CanBeStarted</td>
+                    <td>@Html.EditorFor(model => model.CanBeStarted, new { @class = "form-control" })</td>
+                </tr>
+            </table>
+            <div class="panel-footer text-right" >@Html.ActionLink("Edit Subject", "ViewSubject", new { processid = Model.PD_Process_Id, subjectid = Model.Id, edit = ViewBag.Edit }, new { @class = "btn btn-default" })</div>
+            <div class="panel-footer text-right">
+                <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+                @if (ViewBag.Edit == 1)
+                {
+                    @*<a title="Delete" href="#" onclick="deleteSubject(@Model.Id);return false;" class="btn btn-danger">Delete</a>*@
+                    <a title="Delete" href="#" onclick="showList2('deleteSubject(@Model.Id)');return false;" class="btn btn-danger">Delete</a>
+                    <input type="submit" value="Save" class="btn btn-success" />
+                }
+            </div>
+        </div>
+    </div>
+}

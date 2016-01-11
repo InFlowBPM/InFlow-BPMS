@@ -1,0 +1,77 @@
+﻿@model strICT.InFlow.Web.Models.UserAdministration.EditRoleViewModel
+
+@{
+    ViewBag.Title = "Role_Edit";
+}
+
+<div class="page-header"> <h1><small>Groups&Roles</small><br />Edit group</h1></div>
+
+@using (Html.BeginForm("Role_Edit", "UserAdministration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+  if (!System.Configuration.ConfigurationManager.AppSettings["AzureAD"].Equals("true") || true)
+        {
+            @Html.AntiForgeryToken()
+        }
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.RoleId, new { Value = Model.RoleId })
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Groups
+                    </th>
+                </tr>
+                @foreach (var item in Model.Groups)
+                {
+                    <tr>
+                        <td>
+                            @{ var optionValue = "User_" + item.Name; }
+                            <input type="checkbox"
+                                   id="@optionValue"
+                                   name="SelectedGroups"
+                                   @if (@item.Selected) { @Html.Raw("checked=\"checked\"")    }
+                                   value="@item.Id" />
+                            <label for="@optionValue">@item.Name</label>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+@{
+    ViewBag.Title = "Role_Edit";
+}
+
+
+

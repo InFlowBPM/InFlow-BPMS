@@ -1,0 +1,54 @@
+﻿@model strICT.InFlow.Web.Models.BOD_Item_Model
+
+
+
+@{
+    ViewBag.Title = "ViewBO";
+}
+
+<div class="page-header"> <h1><small>Business Objects</small><br />Design new Business Object</h1></div>
+
+
+<div class="row">
+    <div class="col-md-4">
+
+        @Html.Partial("_Item", Model)
+        @Ajax.ActionLink(" Item", "ItemDetail", new { boid = Model.boid, id = -1, parentId = Model.Id }, new AjaxOptions { UpdateTargetId = "ItemDiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-plus" , @title="add new root-item"})
+    </div>
+
+    <div class="col-md-8">
+
+        <div id="ItemDiv"></div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div style="text-align: left">
+            <br/>
+            @Html.ActionLink("Generate Business Object", "generateBO", new { id = Model.boid }, new { @class = "btn btn-default" })
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+

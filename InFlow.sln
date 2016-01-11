@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_Db", "InFlow_Db\InFlow_Db.csproj", "{34A3AFCF-5B78-44CC-BBE0-245A8CC7D365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_WF", "InFlow_WF\InFlow_WF.csproj", "{ABA33CCD-D038-4F4C-8F73-28C41DAA1416}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_WFM", "InFlow_WFM\InFlow_WFM.csproj", "{1D2A7579-AC1C-483C-8311-C7C91676921A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_Web", "InFlow_Web\InFlow_Web.csproj", "{A99C3DF3-8123-4837-91F2-FE0B4937E4F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_WFM", "App_WFM\App_WFM.csproj", "{28F5E46D-FF36-4867-891B-B9BC14203A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_Workflows", "InFlow_Workflows\InFlow_Workflows.csproj", "{0D71C536-D2C4-4EF8-AB77-B54B2B9238F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_Designer", "InFlow_Designer\InFlow_Designer.csproj", "{66532E9C-7D5E-464D-9F82-98DF157751D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InFlow_Outlook2013", "InFlow_Outlook2013\InFlow_Outlook2013.csproj", "{17116BBA-5934-43DD-804D-13241D4EC7C4}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://strictsolutions.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = InFlow_Db\\InFlow_Db.csproj
+		SccProjectName1 = InFlow_Db
+		SccLocalPath1 = InFlow_Db
+		SccProjectUniqueName2 = InFlow_WF\\InFlow_WF.csproj
+		SccProjectName2 = InFlow_WF
+		SccLocalPath2 = InFlow_WF
+		SccProjectUniqueName3 = InFlow_WFM\\InFlow_WFM.csproj
+		SccProjectName3 = InFlow_WFM
+		SccLocalPath3 = InFlow_WFM
+		SccProjectUniqueName4 = InFlow_Web\\InFlow_Web.csproj
+		SccProjectName4 = InFlow_Web
+		SccLocalPath4 = InFlow_Web
+		SccProjectUniqueName5 = App_WFM\\App_WFM.csproj
+		SccProjectName5 = App_WFM
+		SccLocalPath5 = App_WFM
+		SccProjectUniqueName6 = InFlow_Workflows\\InFlow_Workflows.csproj
+		SccProjectName6 = InFlow_Workflows
+		SccLocalPath6 = InFlow_Workflows
+		SccProjectUniqueName7 = InFlow_Designer\\InFlow_Designer.csproj
+		SccProjectName7 = InFlow_Designer
+		SccLocalPath7 = InFlow_Designer
+		SccProjectUniqueName8 = InFlow_Outlook2013\\InFlow_Outlook2013.csproj
+		SccProjectName8 = InFlow_Outlook2013
+		SccLocalPath8 = InFlow_Outlook2013
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34A3AFCF-5B78-44CC-BBE0-245A8CC7D365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A3AFCF-5B78-44CC-BBE0-245A8CC7D365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A3AFCF-5B78-44CC-BBE0-245A8CC7D365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A3AFCF-5B78-44CC-BBE0-245A8CC7D365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABA33CCD-D038-4F4C-8F73-28C41DAA1416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA33CCD-D038-4F4C-8F73-28C41DAA1416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA33CCD-D038-4F4C-8F73-28C41DAA1416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA33CCD-D038-4F4C-8F73-28C41DAA1416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D2A7579-AC1C-483C-8311-C7C91676921A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D2A7579-AC1C-483C-8311-C7C91676921A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D2A7579-AC1C-483C-8311-C7C91676921A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D2A7579-AC1C-483C-8311-C7C91676921A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99C3DF3-8123-4837-91F2-FE0B4937E4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99C3DF3-8123-4837-91F2-FE0B4937E4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99C3DF3-8123-4837-91F2-FE0B4937E4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99C3DF3-8123-4837-91F2-FE0B4937E4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F5E46D-FF36-4867-891B-B9BC14203A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F5E46D-FF36-4867-891B-B9BC14203A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F5E46D-FF36-4867-891B-B9BC14203A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F5E46D-FF36-4867-891B-B9BC14203A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D71C536-D2C4-4EF8-AB77-B54B2B9238F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D71C536-D2C4-4EF8-AB77-B54B2B9238F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D71C536-D2C4-4EF8-AB77-B54B2B9238F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D71C536-D2C4-4EF8-AB77-B54B2B9238F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66532E9C-7D5E-464D-9F82-98DF157751D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66532E9C-7D5E-464D-9F82-98DF157751D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66532E9C-7D5E-464D-9F82-98DF157751D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66532E9C-7D5E-464D-9F82-98DF157751D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17116BBA-5934-43DD-804D-13241D4EC7C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17116BBA-5934-43DD-804D-13241D4EC7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17116BBA-5934-43DD-804D-13241D4EC7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17116BBA-5934-43DD-804D-13241D4EC7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

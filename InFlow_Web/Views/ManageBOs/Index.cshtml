@@ -1,0 +1,95 @@
+﻿@model IEnumerable<strICT.InFlow.Web.Models.ManageBos.BusinessObjectDTO>
+
+
+<div class="page-header"> <h1><small>Projects</small><br />Business Objects</h1></div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        @item.Name
+                        @*@Html.ActionLink(item.Name, "Details", new { id = item.Id }) @Html.ActionLink(" ", "PreviewBO", new { id = item.Id }, new { @class = "glyphicon glyphicon-eye-open" })*@
+                        @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "glyphicon glyphicon-pencil", @title = "edit business object" })
+                        @Html.ActionLink(" ", "deleteBO", new { id = item.Id }, new { @class = "glyphicon glyphicon-remove" , @title="delete business object"})
+                         <a href="#" class="glyphicon glyphicon-eye-open" title="preview business object" onclick="showBO('@Url.Action("PreviewBO", new { id = item.Id })')"></a>
+                       
+
+                    </td>
+                </tr>
+            }
+        </table>
+        <div style="text-align:right">
+            @Html.ActionLink("Create new Business Object", "newBO", new { }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <p></p>
+            </div>
+            <div class="modal-body">
+                <div id="bocontent"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+
+    <script type="text/javascript">
+
+        function showBO(link) {
+
+
+
+            $("#bocontent").load(link, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success")
+                    $('#myModal').modal({ show: true });
+                if (statusTxt == "error")
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+
+
+        function DoAjaxPostAndMore(btnClicked) {
+            var $form = $(btnClicked).parents('form');
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    alert("errro");
+                },
+                success: function (response) {
+                    //do something with response
+                    //$('#myModal').modal('hide');
+                    $('#bocontainer').replaceWith(response)
+                }
+            });
+
+            return false;// if it's a link to prevent post
+
+        }
+
+    </script>
+}

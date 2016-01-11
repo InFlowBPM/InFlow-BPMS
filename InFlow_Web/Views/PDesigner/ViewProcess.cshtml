@@ -1,0 +1,184 @@
+﻿@section stylesheets
+{
+    @Styles.Render("~/Content/pdesigner.css")
+}
+
+
+<script type="text/javascript">
+    var processId = @ViewBag.ProcessId;
+    var Edit = @ViewBag.Edit;
+    var URL = '@Url.Action("Index", "PDesigner", null, Request.Url.Scheme)';
+    URL = URL.replace('PDesigner','');
+    var apiURL = URL + 'PDesignerAPI/';
+</script>
+
+
+<div class="page-header">
+    <h1><small>S-BPM Process Designer</small><br />@Html.ActionLink(" ", "Index", "Project", new { id = ViewBag.ProjectId}, new { @class = "glyphicon glyphicon-arrow-left" }) @ViewBag.Name (v @ViewBag.Version)</h1>
+    @if (ViewBag.Edit == 1)
+    {
+        <span class="label label-danger">Edit Mode</span>
+    }
+    else
+    {
+        <span class="label label-success">Read Only Mode</span>
+    }
+
+
+
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-1">
+        @if (ViewBag.Edit == 1)
+        {
+            <a title="AddSubject" href="#" onclick="$('#pdesignercontainer').dblclick();return false;" class="btn btn-default btn-xs">InsertSubject</a>
+            <hr />
+            @Ajax.ActionLink("ImportSubject", "_EditImportedProcesses", new { processid = ViewBag.ProcessId, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                        , new { @class = "btn btn-default btn-xs", @id = "link" })
+        }
+        <hr />
+        @Ajax.ActionLink("MessageTypes", "_EditMessageTypesList", new { processid = ViewBag.ProcessId, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                        , new { @class = "btn btn-default btn-xs" })
+
+
+        <hr /><br><br><br><br>
+        <a title="Reset all the processes" href="#" onclick="showList2('resetProcess()');return false;" class="btn btn-default btn-xs">Reset Process</a>
+    </div>
+    <div class="col-md-7">
+        <div id="pdesignercontainer" class="window"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="pdesignerconfig" style="padding-left:10px"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4" style="display:none;">
+        <ul id="pdesignerlog"><li>logs</li></ul>        
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/jquery.jsPlumb-1.5.5-min.js"></script>
+    <script src="~/Scripts/pdesigner.process.js"></script>
+    <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
+
+    <script type="text/javascript">
+    function validatenumber(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\.|\,/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function validateinteger(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function showList(ajaxlink){
+        //listbut.onclick = $('#link').click();
+        document.getElementById("listbut").setAttribute("onclick","$('#"+ajaxlink+"').click()");
+        $('#delete1').modal('show');
+    }
+
+    function showList2(javaAction){
+        //listbut.onclick = $('#link').click();
+        document.getElementById("listbut").setAttribute("onclick", javaAction);
+        $('#delete1').modal('show');
+    }
+
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({ cache: false });
+</script>
+
+
+
+
+}
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal">×</button>
+                <p></p>
+            </div>
+            <div class="modal-body">
+                <div id="formcontent"><center> Wrong action, cannot connect same subject </center></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModalErrorMessage" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal">×</button>
+                <p></p>
+            </div>
+            <div class="modal-body">
+                <div id="formcontent"><center> That message is in use, you should remove the links using this message before deleting the type </center></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete1" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>Are your sure you want to delete?</center>
+            </div>
+            <div class="modal-body" align="center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button id="listbut" type="button" class="btn btn-danger btn-ok" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="changeRepeated" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center>This parameter exists in more than one message. If you change its properties here, all the others will be also changed.</center>
+            </div>
+            <div class="modal-body" align="center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button id="changebut" onclick="replace2();" type="button" class="btn btn-warning" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>

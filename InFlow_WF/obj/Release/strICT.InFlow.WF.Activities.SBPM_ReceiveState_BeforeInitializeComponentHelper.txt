@@ -1,0 +1,2 @@
+ReceiveState.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

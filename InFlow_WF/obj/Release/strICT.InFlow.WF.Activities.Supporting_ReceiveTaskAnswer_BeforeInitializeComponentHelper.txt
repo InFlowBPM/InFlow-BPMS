@@ -1,0 +1,2 @@
+ReceiveTaskAnswer.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

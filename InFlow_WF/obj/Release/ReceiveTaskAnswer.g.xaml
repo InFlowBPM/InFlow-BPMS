@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siwas:ReceiveTaskAnswer xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel" xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:siwas="clr-namespace:strICT.InFlow.WF.Activities.Supporting;assembly=InFlow_WF" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities.Messaging</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <siwas:ReceiveTaskAnswer.Implementation>
+    <Sequence>
+      <Sequence.Variables>
+        <Variable x:TypeArguments="p:SubscriptionFilter" Name="filter" />
+        <Variable x:TypeArguments="p:SubscriptionHandle" Name="subscription" />
+      </Sequence.Variables>
+      <p:BuildMatchAllFilter>
+        <p:BuildMatchAllFilter.Result>
+          <OutArgument x:TypeArguments="p:SubscriptionFilter">
+            <mca:CSharpReference x:TypeArguments="p:SubscriptionFilter">filter</mca:CSharpReference>
+          </OutArgument>
+        </p:BuildMatchAllFilter.Result>
+        <InArgument x:TypeArguments="x:String" x:Key="wfID">
+          <mca:CSharpValue x:TypeArguments="x:String">wfID</mca:CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="NotificationType">
+          <mca:CSharpValue x:TypeArguments="x:String">NotificationType</mca:CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="OrderId">
+          <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+        </InArgument>
+      </p:BuildMatchAllFilter>
+      <p:Subscribe>
+        <p:Subscribe.SubscriptionHandle>
+          <InArgument x:TypeArguments="p:SubscriptionHandle">
+            <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+          </InArgument>
+        </p:Subscribe.SubscriptionHandle>
+        <InArgument x:TypeArguments="p:SubscriptionFilter">
+          <mca:CSharpValue x:TypeArguments="p:SubscriptionFilter">filter</mca:CSharpValue>
+        </InArgument>
+      </p:Subscribe>
+      <p:ReceiveNotification>
+        <p:ReceiveNotification.Content>
+          <p1:ReceiveParametersContent>
+            <OutArgument x:TypeArguments="p:DynamicValue" x:Key="data">
+              <mca:CSharpReference x:TypeArguments="p:DynamicValue">Data</mca:CSharpReference>
+            </OutArgument>
+          </p1:ReceiveParametersContent>
+        </p:ReceiveNotification.Content>
+        <p:ReceiveNotification.SubscriptionHandle>
+          <InArgument x:TypeArguments="p:SubscriptionHandle">
+            <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+          </InArgument>
+        </p:ReceiveNotification.SubscriptionHandle>
+      </p:ReceiveNotification>
+      <p:Unsubscribe>
+        <InArgument x:TypeArguments="p:SubscriptionHandle">
+          <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+        </InArgument>
+      </p:Unsubscribe>
+      <sads:DebugSymbol.Symbol>9xAo52ORJPYL1h395w7OGPKycUM6XFVzZXJzXHN0ZWZhblxTb3VyY2VcV29ya3NwYWNlc1xTdHJJQ1RcSW5GbG93MjAxNFxJbkZsb3dcSW5GbG93X1dGXEFjdGl2aXRpZXNcU3VwcG9ydGluZ1xSZWNlaXZlVGFza0Fuc3dlci54YW1sDjkDbA4CAQE+BU0dAgEoTgVXEwIBGVgFZR0CAQpmBWoVAgECRQlFSwIBPkgJSFcCATdBC0FjAgEwSwlLTQIBKVELUWECASFVCVVZAgEaYgtiYQIBElwNXF0CAQtoCWhfAgED</sads:DebugSymbol.Symbol>
+    </Sequence>
+  </siwas:ReceiveTaskAnswer.Implementation>
+</siwas:ReceiveTaskAnswer>

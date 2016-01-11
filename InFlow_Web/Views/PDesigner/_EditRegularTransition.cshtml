@@ -1,0 +1,30 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_RegularTransition_ViewModel
+
+@using (Html.BeginForm("_EditRegularTransition", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Regular Transition @Model.Id</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            @Html.HiddenFor(model => model.PD_Subject_Id)
+
+            <table class="table table-striped">
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.TextBoxFor(model => model.Name, new { @class = "form-control" })</td>
+                </tr>
+            </table>
+            <div class="panel-footer text-right">
+                <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+                @if (ViewBag.Edit == 1)
+                { 
+                    <input type="submit" value="Save" class="btn btn-success" />
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,9 @@
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\InFlow_Designer.dll.config
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\InFlow_Designer.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\InFlow_Designer.pdb
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\EntityFramework.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\EntityFramework.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\obj\Release\InFlow_Designer.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Designer\obj\Release\InFlow_Designer.pdb

@@ -1,0 +1,125 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="strICT.InFlow.WF.Activities.Supporting.ReceiveTaskAnswer"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities"
+ xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="wfID" Type="InArgument(x:String)" />
+    <x:Property Name="Data" Type="OutArgument(p:DynamicValue)" />
+    <x:Property Name="NotificationType" Type="InArgument(x:String)" />
+    <x:Property Name="OrderId" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>CustomActivityLibrary.SBPM.ReceiveFunctionTask_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities.Messaging</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="p:SubscriptionFilter" Name="filter" />
+      <Variable x:TypeArguments="p:SubscriptionHandle" Name="subscription" />
+    </Sequence.Variables>
+    <p:BuildMatchAllFilter sap2010:WorkflowViewState.IdRef="BuildMatchAllFilter_1">
+      <p:BuildMatchAllFilter.Result>
+        <OutArgument x:TypeArguments="p:SubscriptionFilter">
+          <mca:CSharpReference x:TypeArguments="p:SubscriptionFilter">filter</mca:CSharpReference>
+        </OutArgument>
+      </p:BuildMatchAllFilter.Result>
+      <InArgument x:TypeArguments="x:String" x:Key="wfID">
+        <mca:CSharpValue x:TypeArguments="x:String">wfID</mca:CSharpValue>
+      </InArgument>
+      <InArgument x:TypeArguments="x:String" x:Key="NotificationType">
+        <mca:CSharpValue x:TypeArguments="x:String">NotificationType</mca:CSharpValue>
+      </InArgument>
+      <InArgument x:TypeArguments="x:Int32" x:Key="OrderId">
+        <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+      </InArgument>
+    </p:BuildMatchAllFilter>
+    <p:Subscribe sap2010:WorkflowViewState.IdRef="Subscribe_1">
+      <p:Subscribe.SubscriptionHandle>
+        <InArgument x:TypeArguments="p:SubscriptionHandle">
+          <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+        </InArgument>
+      </p:Subscribe.SubscriptionHandle>
+      <InArgument x:TypeArguments="p:SubscriptionFilter">
+        <mca:CSharpValue x:TypeArguments="p:SubscriptionFilter">filter</mca:CSharpValue>
+      </InArgument>
+    </p:Subscribe>
+    <p:ReceiveNotification sap2010:WorkflowViewState.IdRef="ReceiveNotification_1">
+      <p:ReceiveNotification.Content>
+        <p1:ReceiveParametersContent>
+          <OutArgument x:TypeArguments="p:DynamicValue" x:Key="data">
+            <mca:CSharpReference x:TypeArguments="p:DynamicValue">Data</mca:CSharpReference>
+          </OutArgument>
+        </p1:ReceiveParametersContent>
+      </p:ReceiveNotification.Content>
+      <p:ReceiveNotification.SubscriptionHandle>
+        <InArgument x:TypeArguments="p:SubscriptionHandle">
+          <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+        </InArgument>
+      </p:ReceiveNotification.SubscriptionHandle>
+    </p:ReceiveNotification>
+    <p:Unsubscribe sap2010:WorkflowViewState.IdRef="Unsubscribe_1">
+      <InArgument x:TypeArguments="p:SubscriptionHandle">
+        <mca:CSharpValue x:TypeArguments="p:SubscriptionHandle">subscription</mca:CSharpValue>
+      </InArgument>
+    </p:Unsubscribe>
+    <sads:DebugSymbol.Symbol>d1lEOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19XRlxBY3Rpdml0aWVzXFN1cHBvcnRpbmdcUmVjZWl2ZVRhc2tBbnN3ZXIueGFtbA45A2wOAgEBPgVNHQIBKE4FVxMCARlYBWUdAgEKZgVqFQIBAkUJRUsCAT5ICUhXAgE3QQtBYwIBMEsJS00CASlRC1FhAgEhVQlVWQIBGmILYmECARJcDVxdAgELaAloXwIBAw==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="BuildMatchAllFilter_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Subscribe_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ReceiveNotification_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Unsubscribe_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,332">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CustomActivityLibrary.SBPM.ReceiveFunctionTask_1" sap:VirtualizedContainerService.HintSize="262,412" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

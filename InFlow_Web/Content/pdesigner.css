@@ -1,0 +1,178 @@
+﻿.sticky {
+    position: fixed;  
+   
+    top: 50px;  
+    z-index: 100;  
+  
+
+}
+
+.pdesignertools {
+
+}
+
+.pdesignerstate {
+    width: 100px;
+    height: 75px;
+    color: #ffffff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.pdesignerfunction {
+    background-color: #ed7d31;
+}
+
+.pdesignersend {
+    background-color: #70ad47;
+}
+
+.pdesignerreceive {
+    background-color: #4472c4;
+}
+
+.pdesignerref {
+    background-color: gray;
+}
+
+.pdesignertitle {
+    padding: 5px;
+    padding-bottom: 7px;
+    cursor: move;
+    text-align: center;
+    font: 12px sans-serif;
+    height: 35px;
+    overflow:hidden;
+}
+
+.pdesignerregulartransition {
+    width: 60px;
+    height: 10px;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    top: -2px;
+    left: 27px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px dotted gray;
+}
+
+.pdesignerreceivetransition {
+    width: 60px;
+    height: 10px;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    top: -2px;
+    left: 27px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px dotted gray;
+}
+
+.pdesignertimeout {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    background-color: red;
+    cursor: pointer;
+    top: 10px;
+    left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px dotted gray;
+}
+
+.pdesignertransitionLabel {
+    background-color: white;
+    padding: 0.4em;
+    font: 12px sans-serif;
+    color: #000;
+    z-index: 21;
+    border: 1px dotted gray;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: pointer;
+}
+
+.pdesignersubject {
+    width: 92px;
+    height: 287px;
+    color: #ffffff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.pdesignerinternal {
+    background-color: #0070c0;
+    border: 4px solid #0070c0;
+}
+
+.pdesignerexternal {
+    background-color: #000;
+    border: 4px solid #000;
+}
+
+.pdesignermultisubject {
+    border: 4px solid #5b9bd5;
+}
+
+#pdesignercontainer {
+    border: 1px solid gray;
+    width: 680px;
+    height: 900px;
+    float: left;
+}
+#pdesignersubjectcontainer {
+    border: 1px solid gray;
+    width: 680px;
+    height: 900px;
+    float: left;
+}
+
+.pdesignermessage {
+    width: 10px;
+    height: 30px;
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+    top: 200px;
+    left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px dotted gray;
+}
+
+.pdesignermessageLabel {
+    background-color: white;
+    padding: 0.4em;
+    font: 12px sans-serif;
+    color: #000;
+    z-index: 21;
+    border: 1px dotted gray;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: pointer;
+}
+.window { 
+           
+        z-index:0; 
+        position:absolute; 
+        font-size:0.8em;
+}
+
+.rs { 
+           
+     
+        position:absolute; 
+        font-size:0.8em;
+}

@@ -1,0 +1,87 @@
+﻿@model strICT.InFlow.Web.Models.ManageBos.BusinessObjectDetails
+
+
+<div class="page-header"> <h1><small>Business Objects</small><br />Edit BO-Raw Data</h1></div>
+
+<script src="~/Scripts/CodeMirror/codemirror.js"></script>
+<link href="~/Scripts/CodeMirror/codemirror.css" rel="stylesheet" />
+<script src="~/Scripts/CodeMirror/xml.js"></script>
+<script src="~/Scripts/CodeMirror/javascript.js"></script>
+
+
+@using (Html.BeginForm("Details", "ManageBOS", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => Model.Id)
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-1 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    
+     <div class="form-group">
+        @Html.LabelFor(m => m.ViewData, new { @class = "col-md-1 control-label" })
+        <div class="col-md-10">
+            @*
+    @Html.TextAreaFor(m => m.ViewData, 10, 350,new { @class = "form-control" })*@
+            <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
+                @Html.TextAreaFor(m => m.ViewData ,new {  })
+                </div>
+        </div>
+    </div>
+ 
+    <div class="form-group">
+        @Html.LabelFor(m => m.JsonSchema ,new { @class = "col-md-1 control-label" })
+        <div class="col-md-10">
+            <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
+                @Html.TextAreaFor(m => m.JsonSchema, new { })
+                </div>
+            </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.DefaultData, new { @class = "col-md-1 control-label" })
+        <div class="col-md-10">
+            <div style="border-top: 1px solid black; border-bottom: 1px solid black;">
+                @Html.TextAreaFor(m => m.DefaultData, new { @class = "form-control" })
+                </div>
+            </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" class="btn btn-default" value="Save" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    var myCodeMirrorViewData = CodeMirror.fromTextArea(document.getElementById('ViewData'), {
+        height: "350px",
+        mode: "xml",
+        continuousScanning: 500,
+        lineNumbers: true
+    });
+
+    var myCodeMirrorJsonSchema = CodeMirror.fromTextArea(document.getElementById('JsonSchema'), {
+        height: "350px",
+        mode: "javascript",
+        continuousScanning: 500,
+        lineNumbers: true
+    });
+
+    var myCodeMirrorJsonData = CodeMirror.fromTextArea(document.getElementById('DefaultData'), {
+        height: "150px",
+        mode: "javascript",
+        continuousScanning: 500,
+        lineNumbers: true
+    });
+</script>
+}

@@ -1,0 +1,114 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_SendState_ViewModel
+
+@using (Html.BeginForm("_EditSendState", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Send State @Model.Name</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            @Html.HiddenFor(model => model.PD_Subject_Id)
+
+            <table class="table table-striped">
+                <tr>
+                    <td>Name</td>
+                    <td>@Html.TextBoxFor(model => model.Name, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>StartState</td>
+                    <td>@Html.EditorFor(model => model.StartState, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>EndState</td>
+                    <td>@Html.EditorFor(model => model.EndState, new { @class = "form-control" })</td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>@Html.DropDownListFor(model => model.SelectedMessage, Model.AvailableMessages, new { @class = "form-control", @onchange= "this.form.submit()" })</td>
+                </tr>
+                <tr>
+                    <td style="background-color:#e6f2ec">Readable Parameters</td>
+                    <td style="background-color:#e6f2ec">
+                        @*     @Html.ListBox("SelectedReadableParameters",
+                            new MultiSelectList(Model.AvailableReadableParameters,
+                            "Value", "Text",
+                            Model.SelectedReadableParameters),
+                            new
+                            {
+                                SelectionMode="Multiple",
+                                multiple = "multiple",
+                                @class = "multiselect"
+                            })*@
+                        @for (var i = 0; i < Model.AvailableReadableParameters.Count(); i++)
+                        {
+                            @Html.HiddenFor(a => Model.AvailableReadableParameters[i].Value)
+                            @Html.HiddenFor(a => Model.AvailableReadableParameters[i].Text)
+                            @Html.LabelFor(a => Model.AvailableReadableParameters[i].Text, Model.AvailableReadableParameters[i].Text, new { style = "width: 190px; border: none; background-color: transparent;" })
+                            @Html.CheckBoxFor(a => Model.AvailableReadableParameters[i].Selected)
+                        }
+                        @* <a title="clear" href="#" onclick="$('#SelectedReadableParameters option').removeAttr('selected'); return false;">clear</a>*@
+                    </td>
+                </tr>
+                <tr>
+                    <td>Editable Parameters</td>
+                    <td>
+                      @* @Html.ListBox("SelectedEditableParameters",
+                    new MultiSelectList(Model.AvailableEditableParameters,
+                    "Value", "Text",
+                    Model.SelectedEditableParameters),
+                    new
+                    {
+                        multiple = "multiple",
+                        @class = "multiselect"
+                    })*@
+                        @for (var i = 0; i < Model.AvailableReadableParameters.Count(); i++)
+                        {
+                            @Html.HiddenFor(a => Model.AvailableEditableParameters[i].Value)
+                            @Html.HiddenFor(a => Model.AvailableEditableParameters[i].Text)
+                            @Html.LabelFor(a => Model.AvailableEditableParameters[i].Text, Model.AvailableEditableParameters[i].Text, new { style = "width: 190px; border: none; background-color: transparent;" })
+                            @Html.CheckBoxFor(a => Model.AvailableEditableParameters[i].Selected, new { @id = "edid" + i })
+                        }
+                        @*<a title="clear" href="#" onclick="$('#SelectedEditableParameters option').removeAttr('selected'); return false;">clear</a>*@
+                    </td>
+                </tr>
+            </table>
+            <div class="panel-footer text-right">
+                <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+                @if (ViewBag.Edit == 1)
+                {
+                    @*<a title="Delete" href="#" onclick="deleteState(@Model.Id);return false;" class="btn btn-danger">Delete</a>*@
+                    <a title="Delete" href="#" onclick="showList2('deleteState(@Model.Id)');return false;" class="btn btn-danger">Delete</a>
+                    <input type="submit" value="Save" class="btn btn-success" />
+                }
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var selectedSoFar="";
+        $(function () {
+            $('#SelectedReadableParameters').click(function () {
+
+                //$("#SelectedReadableParameters")[0].selectedIndex = -1;
+                //$("#SelectedReadableParameters").option[0].selected = true;
+
+
+
+                //var a = $('#SelectedEditableParameters option:selected');
+                //var selected = $("#SelectedReadableParameters").find(':selected');
+                //var selectedSoFar = $("#SelectedReadableParameters").find(':selected');
+                //var selectedText = $("#SelectedReadableParameters").find(':selected').text();               
+                /*selectedSoFar += selected;
+                for (var i = 0; i < x.options.length; i++) {
+                    if (x.options[i].selected == true) {
+                        alert(x.options[i].selected);
+                    }
+                }*/
+                return false;
+            });
+        });
+    </script>
+}

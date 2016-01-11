@@ -1,0 +1,115 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_Parameter_ViewModel
+
+@using (Html.BeginForm("_EditParameter", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="panel panel-primary">
+    <div class="panel-heading">Edit Parameter</div>
+    <div class="panel-body">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor( m => Model.Process_Id)
+        @Html.HiddenFor(m => Model.Subject_Id)
+        <table class="table table-striped">
+            <tr>
+                <td>
+                    Name
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Name, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Type
+                </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Type, Model.AvailableTypes, new { @class = "form-control" ,@id="typeList"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Default Value
+                </td>
+                <td>
+                    @if (Model.Type == "bobasic")
+                    {
+                       @* @Html.TextBoxFor(m => Model.DefaultValue, new { @class = "form-control", @id = "defaultString", @style = "display:none" })*@
+                        <div id="parametereditor" style="display:none"> </div>
+                        
+                        @Html.DropDownListFor(m => m.SelectedBO, Model.AvailableBOs, new { @class = "form-control", @id = "defaultBO", @style = "display:block" }) 
+                    }
+                    else
+                    {
+                       @* @Html.TextBoxFor(m => Model.DefaultValue, new { @class = "form-control", @id = "defaultString", @style = "display:block" })*@
+                        <div id="parametereditor" style="display:block">
+                            @{
+                                Dictionary<string,string> partialmodel = new Dictionary<string,string>();
+                                partialmodel.Add("type",Model.Type);
+                                partialmodel.Add("value",Model.DefaultValue);
+                                }
+
+                            @Html.Partial("_GetParameterValueEditor",partialmodel) 
+                            
+                        </div>
+                        
+                        @Html.DropDownListFor(m => m.SelectedBO, Model.AvailableBOs, new { @class = "form-control", @id = "defaultBO", @style = "display:none" })
+                    }
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer text-right">
+            @if (ViewBag.Edit == 1)
+            {
+                <input type="submit" value="Save" class="btn btn-success" />
+            }
+        </div>
+
+        <script type="text/javascript">
+
+            function checkTypeNow(type)
+            {
+                if (type == "bobasic") {
+                    document.getElementById('parametereditor').style.display = 'none';
+                    document.getElementById('defaultBO').style.display = 'block';
+                }
+                else {
+                    // document.getElementById('parametereditor').innerHTML = '<p> abc </p>';
+                    actionstring = '@Url.Action("_GetParameterValueEditor")' + '?type=' + type
+                    if (type == 'boolean')
+                        actionstring = actionstring + '&value=True'
+                    else
+                        actionstring = actionstring + '&value=0'
+
+                    $.ajax({
+                        type: "GET",
+                        url: actionstring,
+                        error: function (xhr, status, error) {
+                            //do something about the error
+                            alert("errro");
+                        },
+                        success: function (response) {
+                            //do something with response
+                            //$('#myModal').modal('hide');
+                            // $('#bocontainer').replaceWith(response)
+                            document.getElementById('parametereditor').innerHTML = response;
+                        }
+                    });
+
+                    document.getElementById('parametereditor').style.display = 'block';
+                    document.getElementById('defaultBO').style.display = 'none';
+                }
+            }
+
+
+            $('select#typeList').change(function () {
+                checkTypeNow($(this).val());
+            })
+
+
+
+
+
+
+        </script>
+    </div>
+</div>
+}

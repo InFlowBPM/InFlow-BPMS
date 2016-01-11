@@ -1,0 +1,113 @@
+﻿@model strICT.InFlow.Web.Models.JobsViewModels.ReceiveTaskViewModel
+
+@using (Html.BeginForm("_ReceiveState", "Jobs", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @Model.ProcessName @Html.Raw("(v." + Model.Version + ") : ") @Model.Name
+            @if (Model.Done)
+            {
+                if (Model.Timedout)
+                { @Html.Raw("TIMEOUT") }
+                else
+                { @Html.Raw(" DONE ") }
+            }
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ViewMode)
+            Information:
+            <ul>
+                <li>Process started by @Model.StartedByUser on @Model.ProcessStartDate</li>
+                @if (Model.Done)
+                {
+                    <li>Task submitted on @Model.TaskCreatedDate</li>
+                }
+                else
+                {
+                    <li>Task created on @Model.TaskCreatedDate</li>
+                }
+                @if (Model.Timedout)
+                {
+                    <li>Time out occurred on @Model.DoneDate</li>
+                }
+                @if (Model.Done & !Model.Timedout)
+                {
+                    <li>Process ended</li>
+                }
+            </ul>
+            @foreach (var message in Model.Messages)
+            {
+                <div class="span4 collapse-group">
+                    <input type="radio"
+                           id="@message.Message_Id"
+                           name="selectedMessages"
+                           required="required"
+                           value="@message.Message_Id" />
+                    <label for="@message.Message_Id">@Html.Raw(message.Sender_Username + " " + message.Message_Type)</label>
+
+                    <a href="#" class="btn">Details</a>
+                    <div class="collapse">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    Sender
+                                </td>
+                                <td>
+                                    @message.Sender_Username
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Message Type
+                                </td>
+                                <td>
+                                    @message.Message_Type
+                                </td>
+                            </tr>
+                            @foreach (var item in message.Parameters)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.Value
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                </div>
+            }
+        </div>
+
+        <div class="panel-footer text-right">
+            @if (!Model.Done)
+            {
+                <input type="submit" value="Receive" class="btn btn-default" />
+            }
+            else if (!Model.Seen)
+            {
+                @Html.ActionLink("Task Seen", "SetStateAsSeen", new { id = Model.Id, mode = Model.ViewMode }, new { @class = "btn btn-default" })
+            }
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript">
+    $('.collapse-group .btn').on('click', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $collapse = $this.closest('.collapse-group').find('.collapse');
+        $collapse.collapse('toggle');
+    });
+</script>
+
+
+

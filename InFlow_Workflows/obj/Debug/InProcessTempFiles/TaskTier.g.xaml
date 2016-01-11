@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siw:TaskTier xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:siw="clr-namespace:strICT.InFlow.Workflows;assembly=InFlow_Workflows" xmlns:siwa="clr-namespace:strICT.InFlow.WFM.Activities;assembly=InFlow_WFM" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_WFM</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_Workflows</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <siw:TaskTier.Implementation>
+    <Sequence DisplayName="Task-Handler">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMPassword" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMUsername" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMBaseAddress" />
+        <Variable x:TypeArguments="x:Int32" Name="TaskId" />
+      </Sequence.Variables>
+      <Sequence DisplayName="Initialize">
+        <p:GetConfigurationValue Name="cfgSQLConnectionString">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgWFMBaseAddress">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgWFMBaseAddress</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgWFMUsername">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgWFMPassword">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+      </Sequence>
+      <siwa:StoreTask>
+        <siwa:StoreTask.Done>
+          <InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">Done</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.Done>
+        <siwa:StoreTask.EditableParameters>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">EditableParameters</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.EditableParameters>
+        <siwa:StoreTask.InternalOrderId>
+          <InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">InternalOrderId</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.InternalOrderId>
+        <siwa:StoreTask.IsEndState>
+          <InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">IsEndState</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.IsEndState>
+        <siwa:StoreTask.Name>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">Name</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.Name>
+        <siwa:StoreTask.ReadableParameters>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">ReadableParameters</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.ReadableParameters>
+        <siwa:StoreTask.TaskId>
+          <OutArgument x:TypeArguments="x:Int32">
+            <mca:CSharpReference x:TypeArguments="x:Int32">TaskId</mca:CSharpReference>
+          </OutArgument>
+        </siwa:StoreTask.TaskId>
+        <siwa:StoreTask.TaskProperties>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">TaskProperties</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.TaskProperties>
+        <siwa:StoreTask.Type>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">Type</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.Type>
+        <siwa:StoreTask.WFId>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">WFId</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.WFId>
+        <siwa:StoreTask.cfgSQLConnectionString>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+          </InArgument>
+        </siwa:StoreTask.cfgSQLConnectionString>
+      </siwa:StoreTask>
+      <siwa:CheckProcessEnd>
+        <siwa:CheckProcessEnd.IsEndState>
+          <InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">IsEndState</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.IsEndState>
+        <siwa:CheckProcessEnd.WFId>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">WFId</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.WFId>
+        <siwa:CheckProcessEnd.cfgSQLConnectionString>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.cfgSQLConnectionString>
+        <siwa:CheckProcessEnd.cfgWFMBaseAddress>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMBaseAddress</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.cfgWFMBaseAddress>
+        <siwa:CheckProcessEnd.cfgWFMPassword>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.cfgWFMPassword>
+        <siwa:CheckProcessEnd.cfgWFMUsername>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpValue>
+          </InArgument>
+        </siwa:CheckProcessEnd.cfgWFMUsername>
+      </siwa:CheckProcessEnd>
+      <siwa:CreateEmailNotificationForTask>
+        <siwa:CreateEmailNotificationForTask.TaskId>
+          <InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">TaskId</mca:CSharpValue>
+          </InArgument>
+        </siwa:CreateEmailNotificationForTask.TaskId>
+        <siwa:CreateEmailNotificationForTask.cfgSQLConnectionString>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+          </InArgument>
+        </siwa:CreateEmailNotificationForTask.cfgSQLConnectionString>
+      </siwa:CreateEmailNotificationForTask>
+      <sads:DebugSymbol.Symbol>d0FEOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19Xb3JrZmxvd3NcVGFza1RpZXIueGFtbCA4A8UBDgIBAUAFXRADAaICXgWWARYCAXyXAQW2ARwCASG3AQXDASsCAQJBB0chAwHTAkgHTiEDAcMCTwdVIQMBswJWB1whAwGjApMBC5MBXwMBkwJhC2FOAwGEAnALcFQDAfUBawtrVwMB5gF/C39WAwHXAWYLZlsDAcgBhAELhAFXAwG5AYkBC4kBTQMBqgGOAQuOAU0DAZsBegt6WwMBjAF1C3VNAgF9rgELrgFXAgFtpAELpAFfAgFeswELswFXAgFPmgELmgFUAgFAqQELqQFaAgExnwELnwFNAgEivwELvwFfAgESugELugFOAgEDRA1EaQMB1AJLDUtkAwHEAlINUmEDAbQCWQ1ZYQMBpAI=</sads:DebugSymbol.Symbol>
+    </Sequence>
+  </siw:TaskTier.Implementation>
+</siw:TaskTier>

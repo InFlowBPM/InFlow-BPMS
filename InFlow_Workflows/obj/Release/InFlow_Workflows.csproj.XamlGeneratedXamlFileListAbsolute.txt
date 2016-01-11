@@ -1,0 +1,4 @@
+obj\Release\MessageTier.g.xaml
+obj\Release\TaskTier.g.xaml
+obj\Release\strICT.InFlow.Workflows_MessageTier_BeforeInitializeComponentHelper.txt
+obj\Release\strICT.InFlow.Workflows_TaskTier_BeforeInitializeComponentHelper.txt

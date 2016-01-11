@@ -1,0 +1,57 @@
+﻿@model strICT.InFlow.Web.Models.UserAdministration.ShowGroupsAndRightsViewModel
+
+@{
+    ViewBag.Title = "GroupsRoles";
+}
+<div class="page-header"> <h1><small>Administration</small><br />Groups&Roles</h1></div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Groups
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Groups)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class ="text-right">
+                        <a href="@Url.Action("Group_Edit", new { id = item.Id })"  class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="@Url.Action("Group_Delete", new { id = item.Id })" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-minus"></span></a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="text-right">@Html.ActionLink("New Group", "Group_Edit", new { id = -1 }, new { @class = "btn btn-default" })</div>
+    </div>
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Roles
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Roles)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="text-right">
+                        <a href="@Url.Action("Role_Edit", new { id = item.Id })" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="@Url.Action("Role_Delete", new { id = item.Id })" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-minus"></span></a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="text-right">@Html.ActionLink("New Role", "Role_Edit", new { id = -1 }, new { @class = "btn btn-default" })</div>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+﻿@model strICT.InFlow.Web.Models.BOD_Item_Model
+
+<ul>
+   @* @if (Model.Type != BODesigner.Contracts.POD_DataTypes._array)
+    {*@
+        @foreach (var item in Model.ChildItems)
+        {
+            <li>
+                @item.Name
+                @Ajax.ActionLink(" ", "ItemDetail", new { boid = item.boid, id = item.Id, parentId = item.ParentId }, new AjaxOptions { UpdateTargetId = "ItemDiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-pencil", @title="edit item" })
+                @if (item.Type == strict.InFlow.Designer.BODb.Contracts.POD_DataTypes._object)
+                {
+                    @Ajax.ActionLink(" ", "ItemDetail", new { boid = item.boid, id = -1, parentId = item.Id }, new AjaxOptions { UpdateTargetId = "ItemDiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-plus", @title = "add sub-item" })
+
+                }
+                @if (Model.Type != strict.InFlow.Designer.BODb.Contracts.POD_DataTypes._array)
+                {
+                    @Html.ActionLink(" ", "DeleteItem", new { boid = item.boid, id = item.Id }, new { @class = "glyphicon glyphicon-remove", @title = "remove item" }) 
+                }
+
+                @Html.Partial("_Item", item)
+            </li>
+        }
+    @*}*@
+</ul>
+
+
+

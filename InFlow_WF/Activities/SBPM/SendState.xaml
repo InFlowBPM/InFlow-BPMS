@@ -1,0 +1,294 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="strICT.InFlow.WF.Activities.SBPM.SendState"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:strICT.InFlow.WF.Activities.Supporting"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="readableParameters" Type="InArgument(x:String)" />
+    <x:Property Name="editableParameters" Type="InArgument(x:String)" />
+    <x:Property Name="isEndState" Type="InArgument(x:Boolean)" />
+    <x:Property Name="name" Type="InArgument(x:String)" />
+    <x:Property Name="GlobalVariables" Type="InOutArgument(p:DynamicValue)" />
+    <x:Property Name="parameters" Type="InArgument(x:String)" />
+    <x:Property Name="toSubject" Type="InArgument(x:String)" />
+    <x:Property Name="messageType" Type="InArgument(x:String)" />
+    <x:Property Name="OrderId" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>CustomActivityLibrary.SBPM.FunctionState_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Send State" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="p:DynamicValue" Name="localData" />
+      <Variable x:TypeArguments="x:String" Name="localRecipient" />
+      <Variable x:TypeArguments="x:String" Name="GlobalWFId" />
+      <Variable x:TypeArguments="x:String" Name="cfgManagementScopeAddress" />
+      <Variable x:TypeArguments="x:String" Name="cfgProcessScopeAddress" />
+      <Variable x:TypeArguments="x:String" Name="cfgWFMUsername" />
+      <Variable x:TypeArguments="x:String" Name="cfgWFMPassword" />
+      <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+    </Sequence.Variables>
+    <Sequence DisplayName="Initialize State" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <local:InitializeDynamicValue sap2010:WorkflowViewState.IdRef="InitializeDynamicValue_1">
+        <local:InitializeDynamicValue.DynamicVal>
+          <InOutArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+          </InOutArgument>
+        </local:InitializeDynamicValue.DynamicVal>
+      </local:InitializeDynamicValue>
+      <local:GetWorkflowInstanceId sap2010:WorkflowViewState.IdRef="GetWorkflowInstanceId_2">
+        <local:GetWorkflowInstanceId.GlobalWFId>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">GlobalWFId</mca:CSharpReference>
+          </OutArgument>
+        </local:GetWorkflowInstanceId.GlobalWFId>
+      </local:GetWorkflowInstanceId>
+      <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_1" Name="cfgManagementScopeAddress">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgManagementScopeAddress</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+      <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_2" Name="cfgProcessScopeAddress">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgProcessScopeAddress</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+      <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_3" Name="cfgWFMUsername">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+      <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_4" Name="cfgWFMPassword">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+      <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_5" Name="cfgSQLConnectionString">
+        <p:GetConfigurationValue.Result>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+          </OutArgument>
+        </p:GetConfigurationValue.Result>
+      </p:GetConfigurationValue>
+    </Sequence>
+    <local:CreateSendTask sap2010:WorkflowViewState.IdRef="CreateSendTask_1">
+      <local:CreateSendTask.Name>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">name</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.Name>
+      <local:CreateSendTask.OrderId>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.OrderId>
+      <local:CreateSendTask.cfgManagementScopeAddress>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgManagementScopeAddress</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.cfgManagementScopeAddress>
+      <local:CreateSendTask.cfgWFMPassword>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.cfgWFMPassword>
+      <local:CreateSendTask.cfgWFMUsername>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.cfgWFMUsername>
+      <local:CreateSendTask.editableParameters>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">editableParameters</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.editableParameters>
+      <local:CreateSendTask.globalVariables>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.globalVariables>
+      <local:CreateSendTask.globalWFId>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.globalWFId>
+      <local:CreateSendTask.isEndState>
+        <InArgument x:TypeArguments="x:Boolean">
+          <mca:CSharpValue x:TypeArguments="x:Boolean">isEndState</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.isEndState>
+      <local:CreateSendTask.readableParameters>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">readableParameters</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.readableParameters>
+      <local:CreateSendTask.toSubject>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">toSubject</mca:CSharpValue>
+        </InArgument>
+      </local:CreateSendTask.toSubject>
+    </local:CreateSendTask>
+    <local:ReceiveTaskAnswer DisplayName="ReceiveTaskAnswer" sap2010:WorkflowViewState.IdRef="ReceiveTaskAnswer_2" NotificationType="taskAnswer">
+      <local:ReceiveTaskAnswer.Data>
+        <OutArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpReference x:TypeArguments="p:DynamicValue">localData</mca:CSharpReference>
+        </OutArgument>
+      </local:ReceiveTaskAnswer.Data>
+      <local:ReceiveTaskAnswer.OrderId>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+        </InArgument>
+      </local:ReceiveTaskAnswer.OrderId>
+      <local:ReceiveTaskAnswer.wfID>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+        </InArgument>
+      </local:ReceiveTaskAnswer.wfID>
+    </local:ReceiveTaskAnswer>
+    <local:WriteDataSendTask DisplayName="WriteData" sap2010:WorkflowViewState.IdRef="WriteDataSendTask_1">
+      <local:WriteDataSendTask.Data>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">localData</mca:CSharpValue>
+        </InArgument>
+      </local:WriteDataSendTask.Data>
+      <local:WriteDataSendTask.GlobalVariables>
+        <InOutArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+        </InOutArgument>
+      </local:WriteDataSendTask.GlobalVariables>
+      <local:WriteDataSendTask.Recipient>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">localRecipient</mca:CSharpReference>
+        </OutArgument>
+      </local:WriteDataSendTask.Recipient>
+    </local:WriteDataSendTask>
+    <local:CreateMessage DisplayName="SendMessage" sap2010:WorkflowViewState.IdRef="CreateMessage_1">
+      <local:CreateMessage.cfgProcessScopeAddress>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgProcessScopeAddress</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.cfgProcessScopeAddress>
+      <local:CreateMessage.cfgSQLConnectionString>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.cfgSQLConnectionString>
+      <local:CreateMessage.cfgWFMPassword>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.cfgWFMPassword>
+      <local:CreateMessage.cfgWFMUsername>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.cfgWFMUsername>
+      <local:CreateMessage.globalVariables>
+        <InArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpValue x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.globalVariables>
+      <local:CreateMessage.globalWFId>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.globalWFId>
+      <local:CreateMessage.parameters>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">parameters</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.parameters>
+      <local:CreateMessage.recipient>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">localRecipient</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.recipient>
+      <local:CreateMessage.type>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">messageType</mca:CSharpValue>
+        </InArgument>
+      </local:CreateMessage.type>
+    </local:CreateMessage>
+    <sads:DebugSymbol.Symbol>d0tEOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19XRlxBY3Rpdml0aWVzXFNCUE1cU2VuZFN0YXRlLnhhbWwvPQOGAg4CAQFIBXoQAwHbA3sFswEcAwGUArQBBcQBHwMB3AHFAQXVAR8DAaUB1gEFhAIbAgECSQdPJgMBzgRQB1YlAwG7BFcHXSEDAagEXgdkIQMBlQRlB2shAwGCBGwHciEDAe8Dcwd5IQMB3AOwAQuwAVIDAckDjQELjQFXAwG3A5IBC5IBVwMBpQOcAQucAV4DAZMDoQELoQFTAwGBA6sBC6sBWwMB7wKDAQuDAU8DAd0CpgELpgFUAwHLApcBC5cBWwMBuQJ+C35NAwGnAogBC4gBYgMBlQLBAQvBAVMDAYICtAGFAbQBkQEDAYECtwELtwFgAwHvAbwBC7wBTwMB3QHSAQvSAV8DAcoBzQELzQFmAwG4AcgBC8gBWAMBpgHjAQvjAVcDAZMB3gEL3gFfAwGBAegBC+gBVwIBb+0BC+0BXgIBXdkBC9kBXwIBS/IBC/IBUwIBOfwBC/wBVwIBJ4ECC4ECVAIBFfcBC/cBUwIBA0wNTGgDAc8EUw1TXQMBvARaDVpsAwGpBGENYWkDAZYEaA1oYQMBgwRvDW9hAwHwA3YNdmkDAd0D</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="InitializeDynamicValue_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetWorkflowInstanceId_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_5" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CreateSendTask_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="ReceiveTaskAnswer_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="WriteDataSendTask_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="CreateMessage_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,423">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CustomActivityLibrary.SBPM.FunctionState_1" sap:VirtualizedContainerService.HintSize="262,503" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,102 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_MessageTypeDTO_ViewModel
+
+@using (Html.BeginForm("_EditMessageType", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Message Type @Model.Id</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            @Html.HiddenFor(model => Model.Name)
+            <table class="table table-striped">
+                <tr>
+                    <td>Name</td>                   
+                    <td><input type="text" id="newName" name="newName" value="@Model.Name" class="form-control" /></td>
+                </tr>
+            </table>
+            
+            <!--arrobaif(Model.Id > 0){-->
+                 <table class="table table-striped">
+            <tr>
+                <td>Parameter</td>
+                <td>Type</td>
+                <td>DefaultValue</td>
+                <td></td>
+            </tr>
+            
+
+            @foreach (var i in Model.Parameters)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.Type</td>
+                    <td>@i.DefaultValue</td>
+                    <td>
+                        @if (ViewBag.Edit == 1)
+                        {
+                           @Ajax.ActionLink(" ", "_EditMessageParameter", new { processid = Model.PD_Process_Id, messagetypeId = Model.Id, parameter = i.Name, edit = ViewBag.Edit, messageName = "newName" },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                          , new { @class = "glyphicon glyphicon-pencil", @title = "edit parameter" })
+
+                            @Ajax.ActionLink(" ", "_DeleteMessageParameter", new { processid = Model.PD_Process_Id, messagetypeId = Model.Id, parameter = i.Name },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                                 , new { @class = "glyphicon glyphicon-minus", @title = "remove parameter", @id = "deletePar"+@i.Name, @style = "display:none" })
+    <a title="Delete" href="#" onclick="showList('deletePar'+'@i.Name');return false;" class="glyphicon glyphicon-minus"></a>
+                            @*"showList('deletePar'+@i.Name);return false;*@
+
+                        }
+            </td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="change">
+            <span onclick="replace()" class="btn glyphicon glyphicon-plus"></span>
+            @*<input type="button" onclick="replace()" class="glyphicon glyphicon-minus" style="background:none" />  *@
+                </td>
+            </tr>
+        </table>
+            <!--}-->
+                
+            <div class="panel-footer text-right">
+                @Ajax.ActionLink("Cancel", "_EditMessageTypesList", new { processid = Model.PD_Process_Id, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                               , new { @class = "btn btn-warning" })
+                @if (ViewBag.Edit == 1)
+                {
+                    <input type="submit" value="Save" class="btn btn-success" />
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var EMP = '@Ajax.ActionLink(" ", "_EditMessageParameter", new { processid = Model.PD_Process_Id, messagetypeId = Model.Id, parameter = "", edit = ViewBag.Edit, messageName = "replacement" }, new AjaxOptions{ UpdateTargetId = "pdesignerconfig", InsertionMode = InsertionMode.Replace, HttpMethod = "GET"}, new { @id="test",   @title = "add new parameter" })';
+        function replace() {
+            EMP = EMP.replace("replacement", document.getElementById('newName').value);
+            $("#change").append(EMP);
+            $('#test').click();
+        }
+    </script>
+}

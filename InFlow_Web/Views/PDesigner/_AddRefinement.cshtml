@@ -1,0 +1,49 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_Refinements_ViewModel
+
+@Html.AntiForgeryToken()
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Refinements</div>
+    <div class="panel-body">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PD_Subject_Id)
+        @Html.HiddenFor(model => model.PD_Process_Id)
+        @Html.HiddenFor(model => model.Refinements)
+        <table class="table table-striped">
+            <tr>
+                <td>Name</td>
+                <td>System</td>
+                <td>Description</td>
+                <td> </td>
+            </tr>
+            @foreach (var i in Model.Refinements)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>@i.System</td>
+                    <td>@i.Description</td>
+                    <td>
+                        @if (ViewBag.Edit == 1)
+                        {
+                            @Html.ActionLink(" ", "AddRefinementTo", new { processid = Model.PD_Process_Id, subjectid = Model.PD_Subject_Id, parameters = i.Parameters, name = @i.Name },
+                 new { @class = "glyphicon glyphicon-plus", @title = "Add Refinement" })
+
+                        }
+                       
+
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+            </tr>
+        </table>
+        <div class="panel-footer text-right">
+            <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+        </div>
+    </div>
+</div>

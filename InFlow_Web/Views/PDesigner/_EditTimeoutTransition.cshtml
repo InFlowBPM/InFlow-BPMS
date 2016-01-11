@@ -1,0 +1,52 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_TimeoutTransition_ViewModel
+
+@using (Html.BeginForm("_EditTimeoutTransition", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">TimeOut Transition @Model.Id</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            @Html.HiddenFor(model => model.PD_Subject_Id)
+
+            <table class="table table-striped">
+                <tr>
+                    <td>TimeSpan</td>
+                    <td>@Html.TextBoxFor(model => model.TimeSpan, new { @class = "form-control", @id="TS", @name="TS" })</td>                    
+                </tr>
+            </table>
+            <div class="panel-footer text-right">
+                <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+                @if (ViewBag.Edit == 1)
+                {
+                    <input id="sub" name="sub" type="submit" value="Save" class="btn btn-success" style="display:none"/>
+                    <input type="button" value="Save" onclick="checkCorrect(document.getElementById('TS').value);" class="btn btn-success" />
+                }
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    function checkCorrect (timeout) {
+        if(timeout.length==8){
+            var days = parseInt(timeout.substr(0,2));
+            var dots1 = timeout.substr(2,1);
+            var hours = parseInt(timeout.substr(3,2));
+            var dots2 = timeout.substr(5,1);
+            var mins = parseInt(timeout.substr(6,2));
+            if (isNaN(days) || dots1 != ":" || isNaN(hours) || hours > 23 || dots2 != ":" || isNaN(mins) || mins > 59) {
+                $('#myModalTimeoutErrorMessage').modal('toggle');
+                $('#myModalTimeoutErrorMessage').modal('show');
+            } else {
+                $("#sub").trigger('click');
+            }
+        }else{
+            //return alert("error");
+            $('#myModalTimeoutErrorMessage').modal('toggle');
+            $('#myModalTimeoutErrorMessage').modal('show');
+        }
+    }
+</script>

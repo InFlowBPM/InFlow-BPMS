@@ -1,0 +1,15 @@
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\InFlow_Outlook2013_LP.dll.config
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\InFlow_Outlook2013_LP.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\InFlow_Outlook2013_LP.pdb
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\InFlow_Outlook2013_LP.dll.manifest
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\InFlow_Outlook2013_LP.vsto
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Newtonsoft.Json.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Newtonsoft.Json.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\bin\Debug\Microsoft.Office.Tools.Outlook.v4.0.Utilities.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\obj\Debug\InFlow_Outlook2013.Properties.Resources.resources
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\obj\Debug\InFlow_Outlook2013_LP.csproj.GenerateResource.Cache
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\obj\Debug\InFlow_Outlook2013_LP.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Outlook2013\obj\Debug\InFlow_Outlook2013_LP.pdb

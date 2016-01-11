@@ -1,0 +1,27 @@
+﻿@model IEnumerable<strICT.InFlow.Web.Models.JobsViewModels.ProcessTasksViewModel>
+
+<div class="list-group">
+    @foreach (var process in Model)
+    {
+        <div class="list-group-item  ">
+            <div class="text-primary">
+                @Html.Raw(process.ProcessName + " (v." + process.Version + ")")
+            </div>
+            @process.Description
+        </div>
+
+        <div class="list-group-item">
+            @foreach (var item in process.Tasks)
+            {
+
+                @Ajax.ActionLink(@item.Type + " " + @item.Name, "_State", new { id = item.Id, mode = "web" }, new AjaxOptions
+                               {
+                                   UpdateTargetId = "TaskDetail",
+                                   InsertionMode = InsertionMode.Replace,
+                                   HttpMethod = "GET"
+                               }, new { @class = "list-group-item", title = "[" + item.DateTime + "]" });
+            }
+        </div>
+    }
+</div>
+

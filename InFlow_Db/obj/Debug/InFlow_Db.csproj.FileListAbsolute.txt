@@ -1,0 +1,16 @@
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\InFlow_Db.dll.config
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\InFlow_Db.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\InFlow_Db.pdb
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\EntityFramework.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Microsoft.ServiceBus.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Newtonsoft.Json.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\EntityFramework.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\obj\Debug\InFlow_Db.dll
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\obj\Debug\InFlow_Db.pdb
+C:\Users\stefan.STRICT\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\obj\Debug\InFlow_Db.csprojResolveAssemblyReference.cache

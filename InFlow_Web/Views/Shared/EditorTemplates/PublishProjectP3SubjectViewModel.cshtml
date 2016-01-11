@@ -1,0 +1,10 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels.PublishProjectP3SubjectViewModel
+<tr>
+    <td>
+        @Html.Label(Model.SubjectName, new { @class = "col-md-2 control-label" })
+    </td>
+    <td>
+        @Html.HiddenFor(m => Model.SubjectId)
+        @Html.DropDownListFor(m => Model.SelectedRole, Model.AvailableRoles, new { @class = "form-control" })
+    </td>
+</tr>

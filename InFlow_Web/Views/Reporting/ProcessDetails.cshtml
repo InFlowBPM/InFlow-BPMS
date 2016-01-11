@@ -1,0 +1,48 @@
+﻿@model strICT.InFlow.Web.Models.ProcessDetailsViewModel
+
+
+<div class="page-header"> <h1><small>Reporting</small><br />Server Status</h1></div>
+
+
+<div class="row">
+
+
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Info</th>
+            </tr>
+            <tr>
+                <td> @Model.Id</td>
+                <td>@Model.Name</td>
+                <td> @Model.Version</td>
+                <td>@Model.Info</td>
+            </tr>
+        </table>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>DateStarted</th>
+                <th>StartedByUser</th>
+                <th>DateEnded</th>
+                <th>EndedByUser</th>
+                <th>CycleTime</th>
+            </tr>
+            @foreach (var item in Model.Details)
+            {
+                <tr @if(item.Ended){@Html.Raw("class=\"success\"")}else{@Html.Raw("class=\"warning\"")}>
+                    <td>@item.Id</td>
+                    <td>@item.DateStarted</td>
+                    <td>@item.StartedByUser</td>
+                    <td>@if(item.Ended){@item.DateEnded}</td>
+                    <td>@if(item.Ended){@item.EndedByUser}</td>
+                    <td>@if(item.Ended){@item.CycleTime.ToString(@"d\d\ hh\:mm\:ss")}</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model strICT.InFlow.Web.Models.PDesignerViewModels.PD_Message_ViewModel
+
+@using (Html.BeginForm("_EditMessage", "PDesigner", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Message @Model.Id</div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.PD_Process_Id)
+            @* @Html.HiddenFor(model => model.SelectedMessageType)
+            *@
+            <table class="table table-striped">
+                <tr>
+                    <td>MessageType</td>
+                    <td>@Html.DropDownListFor(model => model.SelectedMessageType, Model.AvailableMessageTypes, new { @class = "form-control" })</td>
+                </tr>
+            </table>
+            <div class="panel-footer text-right">
+                
+                <a title="Cancel" href="#" onclick="clearConfigPanel();return false;" class="btn btn-warning">Cancel</a>
+                @if (ViewBag.Edit == 1)
+                {
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    @Ajax.ActionLink("Create new", "_EditMessageTypesList", new { processid = Model.PD_Process_Id, edit = 1 },
+                    new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                        , new { @class = "btn btn-primary", style = "float:left" })
+                }
+            </div>
+        </div>
+    </div>
+}

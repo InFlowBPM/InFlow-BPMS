@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="strICT.InFlow.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ToEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">office@strict-solutions.com</Value>
+    </Setting>
+    <Setting Name="SMTPUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">azure_64916e6387b2f951d3789f3725df7fe6@azure.com</Value>
+    </Setting>
+    <Setting Name="SMTPPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">JqvuCLy4sFzSd40</Value>
+    </Setting>
+    <Setting Name="SMTPHostname" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.sendgrid.net</Value>
+    </Setting>
+    <Setting Name="MainLogoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Content/images/rp_logo_w.png</Value>
+    </Setting>
+    <Setting Name="FormLogoUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://www.rieglerundpartner.at/tl_files/template/logo.png</Value>
+    </Setting>
+    <Setting Name="FormStyle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">background-color:black;color:white;</Value>
+    </Setting>
+    <Setting Name="ReportTemplate_V" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\StrICT\RP\Vorlage_RP_V.docx</Value>
+    </Setting>
+    <Setting Name="ReportTemplate_H" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\StrICT\RP\Vorlage_RP_H.docx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

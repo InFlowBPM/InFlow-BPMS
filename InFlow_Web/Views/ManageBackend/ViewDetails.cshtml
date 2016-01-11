@@ -1,0 +1,90 @@
+﻿@model strICT.InFlow.Web.Models.ManageBackendViewModels.ManageBackendProcessDetailViewModel
+@{
+    ViewBag.Title = "ViewDetails";
+}
+
+
+<div class="page-header"> <h1><small>Manage Backend</small><br />Published Process Details</h1></div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-striped">
+            <tr>
+                <th>Project Id</th>
+                <td>@Model.ProjectId</td>
+            </tr>
+            <tr>
+                <th>Project Name</th>
+                <td>@Model.ProjectName</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>@Model.Version</td>
+            </tr>
+            <tr>
+                <th>Process Id</th>
+                <td>@Model.ProcessId</td>
+            </tr>
+            <tr>
+                <th>ProcessScope Name</th>
+                <td>@Model.ProcessScopeName</td>
+            </tr>
+            <tr>
+                <th>Process Info</th>
+                <td>@Model.ProcessInfo</td>
+            </tr>
+            <tr>
+                <th>Process Publishdate</th>
+                <td>@Model.PublishDate</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>@Model.Active</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-8">
+        <h4>Subjects</h4>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Assigned Role</th>
+                <th>Related Users</th>
+            </tr>
+            @foreach (var item in Model.Subjects)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>@item.AssignedRole</td>
+                    <td>
+                        <div class="span4 collapse-group">
+                            <a href="#" class="btn">Show Users</a>
+                            <div class="collapse">
+                                @foreach(var i in item.RelatedUsers)
+                                {
+                                    @i @Html.Raw(", ")
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+<script type="text/javascript">
+    $('.collapse-group .btn').on('click', function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        var $collapse = $this.closest('.collapse-group').find('.collapse');
+        $collapse.collapse('toggle');
+    });
+</script>
+    }
+

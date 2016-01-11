@@ -1,0 +1,2 @@
+MessageTier.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

@@ -1,0 +1,2 @@
+InitializeDynamicValue.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

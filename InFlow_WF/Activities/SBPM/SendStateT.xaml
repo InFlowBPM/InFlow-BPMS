@@ -1,0 +1,305 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="strICT.InFlow.WF.Activities.SBPM.SendStateT"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:local="clr-namespace:strICT.InFlow.WF.Activities.Supporting"
+ xmlns:local1="clr-namespace:strICT.InFlow.WF.Activities.SBPM"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="TimeOut" Type="InArgument(x:String)" />
+    <x:Property Name="isEndState" Type="InArgument(x:Boolean)" />
+    <x:Property Name="name" Type="InArgument(x:String)" />
+    <x:Property Name="GlobalVariables" Type="InOutArgument(p:DynamicValue)" />
+    <x:Property Name="readableParameters" Type="InArgument(x:String)" />
+    <x:Property Name="editableParameters" Type="InArgument(x:String)" />
+    <x:Property Name="parameters" Type="InArgument(x:String)" />
+    <x:Property Name="toSubject" Type="InArgument(x:String)" />
+    <x:Property Name="messageType" Type="InArgument(x:String)" />
+    <x:Property Name="GlobalTransition" Type="OutArgument(x:String)" />
+    <x:Property Name="OrderId" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>CustomActivityLibrary.SBPM.ReceiveStateT_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_9">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+      <Variable x:TypeArguments="x:String" Name="GlobalWFId" />
+    </Sequence.Variables>
+    <local:GetWorkflowInstanceId sap2010:WorkflowViewState.IdRef="GetWorkflowInstanceId_1">
+      <local:GetWorkflowInstanceId.GlobalWFId>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">GlobalWFId</mca:CSharpReference>
+        </OutArgument>
+      </local:GetWorkflowInstanceId.GlobalWFId>
+    </local:GetWorkflowInstanceId>
+    <p:GetConfigurationValue sap2010:WorkflowViewState.IdRef="GetConfigurationValue_1" Name="cfgSQLConnectionString">
+      <p:GetConfigurationValue.Result>
+        <OutArgument x:TypeArguments="x:String">
+          <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+        </OutArgument>
+      </p:GetConfigurationValue.Result>
+    </p:GetConfigurationValue>
+    <TryCatch sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch.Try>
+        <Parallel sap2010:WorkflowViewState.IdRef="Parallel_2">
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <local1:SendState sap2010:WorkflowViewState.IdRef="SendState_1">
+              <local1:SendState.GlobalVariables>
+                <InOutArgument x:TypeArguments="p:DynamicValue">
+                  <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+                </InOutArgument>
+              </local1:SendState.GlobalVariables>
+              <local1:SendState.OrderId>
+                <InArgument x:TypeArguments="x:Int32">
+                  <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.OrderId>
+              <local1:SendState.editableParameters>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">editableParameters</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.editableParameters>
+              <local1:SendState.isEndState>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpValue x:TypeArguments="x:Boolean">isEndState</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.isEndState>
+              <local1:SendState.messageType>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">messageType</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.messageType>
+              <local1:SendState.name>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">name</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.name>
+              <local1:SendState.parameters>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">parameters</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.parameters>
+              <local1:SendState.readableParameters>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">readableParameters</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.readableParameters>
+              <local1:SendState.toSubject>
+                <InArgument x:TypeArguments="x:String">
+                  <mca:CSharpValue x:TypeArguments="x:String">toSubject</mca:CSharpValue>
+                </InArgument>
+              </local1:SendState.toSubject>
+            </local1:SendState>
+            <If sap2010:WorkflowViewState.IdRef="If_4">
+              <If.Condition>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpValue x:TypeArguments="x:Boolean">TimeOut.Length &gt; 0</mca:CSharpValue>
+                </InArgument>
+              </If.Condition>
+              <If.Then>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Throw sap2010:WorkflowViewState.IdRef="Throw_3">
+                    <InArgument x:TypeArguments="s:Exception">
+                      <mca:CSharpValue x:TypeArguments="s:Exception">new Exception("Done");</mca:CSharpValue>
+                    </InArgument>
+                  </Throw>
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <If sap2010:WorkflowViewState.IdRef="If_5">
+              <If.Condition>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpValue x:TypeArguments="x:Boolean">TimeOut.Length &gt; 0</mca:CSharpValue>
+                </InArgument>
+              </If.Condition>
+              <If.Then>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Delay sap2010:WorkflowViewState.IdRef="Delay_2">
+                    <InArgument x:TypeArguments="x:TimeSpan">
+                      <mca:CSharpValue x:TypeArguments="x:TimeSpan">TimeSpan.Parse(TimeOut)</mca:CSharpValue>
+                    </InArgument>
+                  </Delay>
+                  <local:markTaskAsTimedOut sap2010:WorkflowViewState.IdRef="markTaskAsTimedOut_1">
+                    <local:markTaskAsTimedOut.OrderId>
+                      <InArgument x:TypeArguments="x:Int32">
+                        <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+                      </InArgument>
+                    </local:markTaskAsTimedOut.OrderId>
+                    <local:markTaskAsTimedOut.cfgSQLConnectionString>
+                      <InOutArgument x:TypeArguments="x:String">
+                        <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+                      </InOutArgument>
+                    </local:markTaskAsTimedOut.cfgSQLConnectionString>
+                    <local:markTaskAsTimedOut.globalWFId>
+                      <InArgument x:TypeArguments="x:String">
+                        <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+                      </InArgument>
+                    </local:markTaskAsTimedOut.globalWFId>
+                  </local:markTaskAsTimedOut>
+                  <Throw sap2010:WorkflowViewState.IdRef="Throw_4">
+                    <InArgument x:TypeArguments="s:Exception">
+                      <mca:CSharpValue x:TypeArguments="s:Exception">new Exception("TimeOut");</mca:CSharpValue>
+                    </InArgument>
+                  </Throw>
+                </Sequence>
+              </If.Then>
+            </If>
+          </Sequence>
+        </Parallel>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <If sap2010:WorkflowViewState.IdRef="If_6">
+              <If.Condition>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <mca:CSharpValue x:TypeArguments="x:Boolean">exception.Message.Equals("TimeOut")</mca:CSharpValue>
+                </InArgument>
+              </If.Condition>
+              <If.Then>
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">
+                      <mca:CSharpReference x:TypeArguments="x:String">GlobalTransition</mca:CSharpReference>
+                    </OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">TimeOut!</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Then>
+              <If.Else>
+                <Assign sap2010:WorkflowViewState.IdRef="Assign_3">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:String">
+                      <mca:CSharpReference x:TypeArguments="x:String">GlobalTransition</mca:CSharpReference>
+                    </OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:String">OK!</InArgument>
+                  </Assign.Value>
+                </Assign>
+              </If.Else>
+            </If>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <sads:DebugSymbol.Symbol>d0xEOlxTdHJJQ1RcMDJQcm9qZWN0c1xWUzIwMTNcSW5GbG93XEluRmxvd19XRlxBY3Rpdml0aWVzXFNCUE1cU2VuZFN0YXRlVC54YW1sK0ED7AEOAgEBRgVMIwMBvgJNBVMfAwGvAlQF6gEQAgECSQtJWwMBvwJQC1BnAwGwAlYJwAEUAgE1yAEN5gESAgEDVwuXARYDAZABmAELvwEWAgE2ywETywF1AgEEzwER2AEaAgEk2wER5AEaAgETWA2GASADAbABhwENlgESAwGRAZkBDb4BEgIBN9YBPNYBRAIBNNIBF9IBbQIBJeIBPOIBPwIBI94BF94BbQIBFIMBE4MBWgMBoQJbE1tuAwGTAn4TfmMDAYUCYBNgVwMB9wFqE2pcAwHpAW8Tb1wDAdsBZRNlYwMBzQF5E3lbAwG/AXQTdFUDAbEBigETigFnAwGSAY4BEZQBHAMBoAGcAROcAWcCATigARG8ARwCAUaPAROTARsDAaEBoQETpQEbAwGBAaYBE7YBLgIBVrcBE7sBGwIBR5EBF5EBbgMBogGjARejAW4DAYIBrgEZrgF1AgFzswEZswFhAgFlqQEZqQFdAgFXuQEXuQFxAgFI</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="GetWorkflowInstanceId_1" sap:VirtualizedContainerService.HintSize="1144,22" />
+      <sap2010:ViewStateData Id="GetConfigurationValue_1" sap:VirtualizedContainerService.HintSize="1144,22" />
+      <sap2010:ViewStateData Id="SendState_1" sap:VirtualizedContainerService.HintSize="464,22" />
+      <sap2010:ViewStateData Id="Throw_3" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="222,146">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="464,296" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="486,544">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="200,22">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="markTaskAsTimedOut_1" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Throw_4" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="222,270">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="464,420" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="486,544">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Parallel_2" sap:VirtualizedContainerService.HintSize="1126,590" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="509,211" />
+      <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="1130,21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="1144,817" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="1166,1065">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CustomActivityLibrary.SBPM.ReceiveStateT_1" sap:VirtualizedContainerService.HintSize="1206,1145" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<strICT.InFlow.Web.Models.ManageBackendViewModels.ManageBackendProcessItemViewModel>
+
+
+<div class="page-header"> <h1><small>Manage Backend</small><br />Published Processes</h1></div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Project Id</th>
+                <th>Project Name</th>
+                <th>Version</th>
+                <th>Process Id</th>
+                <th>ProcessScope Name</th>
+                <th>Process Info</th>
+                <th>Process Publishdate</th>
+                <th>Active</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProjectId</td>
+                    <td>@Html.ActionLink(item.ProjectName, "ViewDetails", new { processId = item.ProcessId })</td>
+                    <td>@item.Version</td>
+                    <td>@item.ProcessId</td>
+                    <td>@item.ProcessScopeName</td>
+                    <td>@item.ProcessInfo</td>
+                    <td>@item.PublishDate</td>
+                    <td>@item.Active</td>
+                    <td>
+                        @if(item.Active)
+                        {
+                             @Html.ActionLink("Deactivate", "Deactivate", new { ProcessId = item.ProcessId, ProjectFilter = ViewBag.ProjectFilter }, new { @class = "btn btn-default btn-xs" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Activate", "Activate", new { ProcessId = item.ProcessId, ProjectFilter = ViewBag.ProjectFilter }, new { @class = "btn btn-default btn-xs" })
+                            @Html.ActionLink("Fully delete", "DeleteFull", new { ProcessId = item.ProcessId, ProjectFilter = ViewBag.ProjectFilter }, new { @class = "btn btn-default btn-xs" })
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+

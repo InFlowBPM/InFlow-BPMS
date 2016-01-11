@@ -1,0 +1,15 @@
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\InFlow_Db.dll.config
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\InFlow_Db.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\InFlow_Db.pdb
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\EntityFramework.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Microsoft.AspNet.Identity.Core.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Microsoft.ServiceBus.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Newtonsoft.Json.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\EntityFramework.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Microsoft.AspNet.Identity.Core.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\bin\Release\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\obj\Release\InFlow_Db.dll
+C:\Users\stefan\Source\Workspaces\StrICT\InFlow2014\InFlow\InFlow_Db\obj\Release\InFlow_Db.pdb

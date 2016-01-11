@@ -1,0 +1,59 @@
+﻿@using System.Configuration;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>
+        Welcome to the InFlow cloud - Windows Azure Edition @if (ConfigurationManager.AppSettings["AzureAD"].Equals("true"))
+        {
+            <span>with Azure AD Auth</span>
+        }
+    </h1>
+    <p class="lead">
+        InFlow is a software that offers structured information and communication technology as a public cloud solution, in this case hosted at Microsoft Windows Azure.
+        @if (ConfigurationManager.AppSettings["AzureAD"].Equals("true"))
+        {
+            <span>The site also provides user authentication using Windows Azure Active Directory user accounts.</span>
+        }
+    </p>
+    <div id="inflowmore" class="collapse">
+        @Html.Partial("_Info")
+
+    </div>
+    <p>
+        <button type="button" class="btn btn-primary btn-large" data-toggle="collapse" data-target="#inflowmore">
+            Learn more &raquo;
+        </button>
+    </p>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Manage your Processes</h2>
+        <p>
+            InFlow supports process design and management. Soon, multiple users can model and develop together processes within the InFlow Process Workspace.
+        </p>
+        @if (User.IsInRole("ProcessEditor"))
+        {
+            <p>@Html.ActionLink("Projects", "Index", "Project", new { id = -1 }, new { @class = "btn btn-default" }) </p>
+        }
+    </div>
+    <div class="col-md-4">
+        <h2>Do your Work</h2>
+        <p>Manage your daily work easy and fast within the InFlow ToDo List.</p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>@Html.ActionLink("My Jobs", "Index", "Jobs", new { id = -1 } , new { @class = "btn btn-default" })</p>
+        }
+    </div>
+    <div class="col-md-4">
+        <h2>Monitor the Results</h2>
+        <p>Monitor your company's performance based on custom process KPIs.</p>
+        @if (User.IsInRole("ProcessEditor") || User.IsInRole("CompanyAdmin"))
+        {
+            <p>@Html.ActionLink("Reporting", "Index", "Reporting", new { }, new { @class = "btn btn-default" })</p>
+        }
+    </div>
+</div>

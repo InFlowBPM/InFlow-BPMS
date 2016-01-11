@@ -1,0 +1,65 @@
+﻿@model strICT.InFlow.Web.Models.ProjectViewModels._ProjectWorkspaceViewModel
+@{
+    var currentFolder = Model.Folder;
+    var currentFolderList = new List<strICT.InFlow.Db.Contracts.InFlow.WS_Folder>();
+    while (currentFolder != null)
+    {
+        currentFolderList.Add(currentFolder);
+        currentFolder = currentFolder.Parent;
+    }
+    currentFolderList.Reverse();
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @foreach (var item in currentFolderList)
+        {
+            @item.Name @Html.Raw(" / ")
+        }
+        <b>@Model.Name</b>
+    </div>
+    <div class="panel-body">
+        <div id="editdiv">
+
+            <h3> @Model.Name @Ajax.ActionLink(" ", "_EditProject", new { projectId = Model.Id }, new AjaxOptions { UpdateTargetId = "editdiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-pencil", @title="edit project name and description" })</h3>
+            <p>@Model.Description</p>
+
+            <p>Model Versions:</p>
+            <ul>
+                @foreach (var item in Model.Versions)
+                {
+                    <li>
+                        @item.Version 
+                        @Html.ActionLink(" ", "ViewProcess", "PDesigner", new { processid = item.PD_ProcessId, edit = 0 }, new { @class = "glyphicon glyphicon-eye-open", @title="view model-version" }) 
+                        @if(item.LockedBy == null)
+                        { 
+                            @Html.ActionLink(" ", "ViewProcess", "PDesigner", new { processid = item.PD_ProcessId, edit = 1 }, new { @class = "glyphicon glyphicon-pencil", @title = "edit model-version" })
+                        }else if(item.LockedBy.Equals(User.Identity.Name))
+                        {
+                            @Html.ActionLink(" ", "ViewProcess", "PDesigner", new { processid = item.PD_ProcessId, edit = 1 }, new { @class = "glyphicon glyphicon-pencil", @title = "edit model-version" })
+                            @Html.ActionLink(" ", "Unlock", new { processid = item.PD_ProcessId, projectId = Model.Id }, new { @class = "glyphicon glyphicon-lock", @title = "unlock model-version" })
+                        }
+                        else
+                        {
+                            @Html.Raw("(Locked by User: " + item.LockedBy +")")
+                        }
+                        @if(item.Deleteable)
+                        {
+                            @Html.ActionLink(" ", "DeleteVersion", new { projectId = Model.Id, version = item.Version }, new { @class = "glyphicon glyphicon-remove", @title = "delete model-version" })
+                        }
+                    </li>
+                }
+                <li>@Html.ActionLink("new Version", "NewVersion", new { WS_ProjectId = Model.Id }, new { @class = "btn btn-default btn-xs" })</li>
+            </ul>
+
+        @if (User.IsInRole("CompanyAdmin"))
+        {
+            @Html.ActionLink("Show Published Processes", "Index", "ManageBackend", new { projectId = Model.Id }, new { @class = "btn btn-default" })
+        }
+
+            <div class="text-right">
+                @Html.ActionLink("Publish Project", "PublishProject_P1_Version", new { projectId = Model.Id }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+</div>

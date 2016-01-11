@@ -1,0 +1,63 @@
+﻿@model List<strICT.InFlow.Web.Models.PDesignerViewModels.PD_MessageTypeDTO_ViewModel>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Message Types</div>
+    <div class="panel-body">
+        
+        <table class="table table-striped">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        @Ajax.ActionLink(" ", "_EditMessageType", new { processid = item.PD_Process_Id, id = item.Id, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                     , new { @class = "glyphicon glyphicon-pencil" , @title="edit message type"})
+                        @if (ViewBag.Edit == 1)
+                        {
+                            @Ajax.ActionLink(" ", "_DeleteMessageType", new { processid = item.PD_Process_Id, id = item.Id, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                            , new { @class = "glyphicon glyphicon-minus", @title = "delete message type", @id = "deleteMes"+@item.Id, @style = "display:none" })
+                        <a title="Delete" href="#" onclick="showList('deleteMes'+@item.Id);return false;" class="glyphicon glyphicon-minus"></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+       
+        <div class="panel-footer text-left" style="vertical-align: middle; ">
+            @if (ViewBag.Edit == 1)
+            {
+                @Ajax.ActionLink("Delete all", "_DeleteAllMessageTypes", new { processid = @ViewBag.ProcessId, id = -1, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                       , new { @class = "btn btn-danger", @title = "delete all messages", @id = "deleteMesAll", @style = "display:none" })
+                <a title="delete all messages" href="#" onclick="showList('deleteMesAll');return false;" class="btn btn-danger">Delete all</a>
+
+                @Ajax.ActionLink("New MessageType", "_EditMessageType", new { processid = @ViewBag.ProcessId, id = -1, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                          , new { @class = "btn btn-primary", @style = " float: right" })      
+                
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@model strICT.InFlow.Web.Models.UserAdministration.EditGroupViewModel
+
+@{
+    ViewBag.Title = "Group_Edit";
+}
+
+<div class="page-header"> <h1><small>Groups&Roles</small><br />Edit group</h1></div>
+
+@using (Html.BeginForm("Group_Edit", "UserAdministration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+     
+    <div class="row">
+        <div class="col-md-4">
+           
+            <div class="form-group">
+                @Html.Label("Name", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.GroupName, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 text-right">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.GroupId, new { Value = Model.GroupId })
+    <div class="row">
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Users
+                    </th>
+                </tr>
+                @foreach (var item in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @{ var optionValue = "User_" + item.Name; }
+                            <input type="checkbox"
+                                   id="@optionValue"
+                                   name="SelectedUsers"
+                                   @if (@item.Selected) { @Html.Raw("checked=\"checked\"")  }
+                                   value="@item.Name" />
+                            <label for="@optionValue">@item.Name</label>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Roles
+                    </th>
+                </tr>
+                @foreach (var item in Model.Roles)
+                {
+                    <tr>
+                        <td>
+                            @{ var optionValue = "Role_" + item.Id; }
+                            <input type="checkbox"
+                                   id="@optionValue"
+                                   name="SelectedRoles"
+                                   @if (@item.Selected) { @Html.Raw("checked=\"checked\"")    }
+                                   value="@item.Id" />
+                            <label for="@optionValue">@item.Name</label>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

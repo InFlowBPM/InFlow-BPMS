@@ -1,0 +1,29 @@
+﻿@model List<strICT.InFlow.Web.Models.PDesignerViewModels.PD_MessageTypeDTO_ViewModel>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Current Processes. Select one please</div>
+    <div class="panel-body">
+
+        <table class="table table-striped">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name &nbsp;&nbsp;v.@item.newName</td>
+                    <td>
+                        @if (ViewBag.Edit == 1)
+                        {
+                            @Ajax.ActionLink(" ", "_EditImportedSubjects", new { processidNew = item.PD_Process_Id, processidOld = ViewBag.ProcessId, edit = ViewBag.Edit },
+                  new AjaxOptions
+                                        {
+                                            UpdateTargetId = "pdesignerconfig",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "GET"
+                                        }
+                                       , new { @class = "glyphicon glyphicon-chevron-right", @title = "select" })
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

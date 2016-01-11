@@ -1,0 +1,138 @@
+﻿@model IEnumerable<strICT.InFlow.Web.Models.JobsViewModels.ProcessTasksViewModel>
+
+@{ ViewBag.Title = "My Jobs"; }
+
+<div class="page-header"> <h1><small>My Jobs</small><br />Todo-List<br /></h1></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div id="tlist">
+                @Html.Partial("_TaskList",Model)
+            </div>
+
+                <div class="text-right">
+                    @Html.ActionLink("Start new Process", "NewProcess", new { id = -1 }, new { @class = "btn btn-default" })
+                    <p>
+                        <br /> @Html.ActionLink("View answered Jobs", "AnsweredTasks", "Jobs", new { id = -1 }, new { })
+                    </p>
+                </div>
+            </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-6">
+            <div id="TaskDetail">
+
+            </div>
+        </div>
+    </div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <p></p>
+            </div>
+            <div class="modal-body">
+                <div id="bocontent"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<script type="text/javascript">
+    $(function () {
+        setInterval(function () {
+
+            $('#tlist').hide().load('TaskList').fadeIn('slow');
+        },
+        3000);
+    });
+</script>
+
+
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @if (ViewBag.Id > 0)
+    {
+
+        <script type="text/javascript">
+            var URL = '@Url.Action("NewProcess", "Jobs", null, Request.Url.Scheme)';
+            URL = URL.replace('NewProcess', '');
+            var id = '@ViewBag.Id';
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: URL + "/_State",
+                    data: { id: id, mode:"web" },
+                    type: 'GET',
+                    success: function (data) {
+                        $('#TaskDetail').html(data);
+                    }
+                });
+            });
+        </script>
+
+
+    }
+    <script type="text/javascript">
+        function validatenumber(evt) {
+            var theEvent = evt || window.event;
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+            var regex = /[0-9]|\.|\,/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+
+        function validateinteger(evt) {
+            var theEvent = evt || window.event;
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+            var regex = /[0-9]/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+
+        function showBO(link) {
+            $("#bocontent").load(link, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success")
+                    $('#myModal').modal({ show: true });
+                if (statusTxt == "error")
+                    alert("Error: " + xhr.status + ": " + xhr.statusText + " ... " + link);
+            });
+        }
+
+        function DoAjaxPostAndMore(btnClicked) {
+            var $form = $(btnClicked).parents('form');
+
+            $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: $form.serialize(),
+                error: function (xhr, status, error) {
+                    //do something about the error
+                    alert("errro");
+                },
+                success: function (response) {
+                    //do something with response
+                    // $('#myModal').modal('hide');
+                    $('#bocontainer').replaceWith(response)
+                }
+            });
+            return false;// if it's a link to prevent post
+        }
+
+        function closeBo(btnClicked) {
+            $('#myModal').modal('hide')
+        }
+    </script>
+}

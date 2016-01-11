@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Activities.Design</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Activities.Design.DesignerMetadata">
+      <summary>This class is used to register designer metadata for <see cref="N:Microsoft.Activities.Design" />.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.DesignerMetadata.#ctor">
+      <summary>Creates a new instance of the <see cref="T:Microsoft.Activities.Design.DesignerMetadata" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.DesignerMetadata.Register">
+      <summary>This method is used to register designer metadata for <see cref="N:Microsoft.Activities.Design" />.</summary>
+    </member>
+    <member name="T:Microsoft.Activities.Design.ExpressionIntellisenseFilterProvider">
+      <summary>Represents the filter provider for the expression Intellisense.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionIntellisenseFilterProvider.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Activities.Design.ExpressionIntellisenseFilterProvider" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionIntellisenseFilterProvider.GetFilter(Microsoft.VisualStudio.Shell.Interop.IVsHierarchy,Microsoft.VisualStudio.Shell.Interop.IVsContextualIntellisenseFilter@)">
+      <summary>Returns the filter for the provider.</summary>
+      <returns>The filter for the provider.</returns>
+      <param name="hierarchy">The hierarchy.</param>
+      <param name="intellisenseFilter">The intellisense filter.</param>
+    </member>
+    <member name="T:Microsoft.Activities.Design.SVsWorkflowManagerIntellisenseFilterProvider">
+      <summary>Provides SVsWorkflowManagerIntellisenseFilterProvider object.</summary>
+    </member>
+    <member name="T:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator">
+      <summary>Translates the expressions in a XAML workflow from VB or C# into trees of activities, such that the entire tree is expressed in terms of trusted activities, and no VB or C# is executed at runtime.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.GetExpressionActivities(System.Object)">
+      <summary>Retrieves the specified activity. This method corresponds to a XAML attached property used internally during translation. </summary>
+      <returns>The retrieved activity.</returns>
+      <param name="activity">The activity tree to retrieve.</param>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.SetExpressionActivities(System.Object,System.Activities.Activity)">
+      <summary>Sets a value to the specified activity. This method corresponds to a XAML attached property used internally during translation. </summary>
+      <param name="activity">The activity to set the value upon.</param>
+      <param name="value">The value to set.</param>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.Translate(System.IO.TextReader)">
+      <summary>Translates the expressions of a workflow into trees of activities.</summary>
+      <returns>The result of the translation (<see cref="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults" />) that includes the translated XAML and translation errors (if any).</returns>
+      <param name="textReader">The text reader with the input XAML.</param>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.Translate(System.IO.TextReader,System.Xaml.XamlSchemaContext)">
+      <summary>Translates the expressions of a workflow into trees of activities.</summary>
+      <returns>The result of the translation (<see cref="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults" />) that includes the translated XAML and translation errors (if any).</returns>
+      <param name="textReader">The text reader with the input XAML.</param>
+      <param name="schemaContext">The schema context to be used during translation.</param>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.Translate(System.IO.TextReader,System.Xaml.XamlSchemaContext,System.String,System.String)">
+      <summary>Translates the expressions of a workflow into trees of activities.</summary>
+      <returns>The result of the translation (<see cref="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults" />) that includes the translated XAML and translation errors (if any).</returns>
+      <param name="textReader">The text reader with the input XAML.</param>
+      <param name="schemaContext">The schema context to be used during translation.</param>
+      <param name="localAssemblyPath">The path of local assemblies for references in the XAML.</param>
+      <param name="compiledExpressionRootTypeName">The name of the compiled expression root type. This is used for compiled expressions (e.g. C# support).</param>
+    </member>
+    <member name="M:Microsoft.Activities.Design.ExpressionTranslation.ExpressionTranslator.Translate(System.Xaml.XamlReader)">
+      <summary>Translates the expressions of a workflow into trees of activities.</summary>
+      <returns>The result of the translation (<see cref="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults" />) that includes the translated XAML and translation errors (if any).</returns>
+      <param name="input"> The XAML reader with the input XAML.</param>
+    </member>
+    <member name="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationError">
+      <summary>An error thrown during expression translation.</summary>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.ActivityId">
+      <summary>The Id of the offending activity</summary>
+      <returns>Gets the Id of the offending activity</returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.EndColumn">
+      <summary>The end column from the original XAML file where the error happened.</summary>
+      <returns>Gets the end column from the original XAML file where the error happended. </returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.EndLine">
+      <summary>The end line from the original XAML file where the error happened. </summary>
+      <returns>Gets the end line from the original XAML file where the error happened. </returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.ExpressionText">
+      <summary>The original VB/C# expression text that produced the error. For example, the VB condition in an If activity (if it can't be translated)</summary>
+      <returns>Gets the original VB/C# expression text that produced the error.</returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.Message">
+      <summary>The error message (why the translation did not succeed).</summary>
+      <returns>Gets the error message.</returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.StartColumn">
+      <summary>The start column from the original XAML file where the error happened.</summary>
+      <returns>Gets the start column from the original XAML file where the error happened.</returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationError.StartLine">
+      <summary>The start line from the original XAML file where the error happened.</summary>
+      <returns>Gets the start line from the original XAML file where the error happened.</returns>
+    </member>
+    <member name="T:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults">
+      <summary>Contains the results of translating the expressions of a workflow. These results contain the translated XAML (provided as a XamlReader) and the set of errors (if any) from the expression translation operation.</summary>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults.Errors">
+      <summary>The set of errors from the translation operation. Errors include the message and information about the offending activity within the original xaml file.</summary>
+      <returns>Gets the set of errors from the translation operation. </returns>
+    </member>
+    <member name="P:Microsoft.Activities.Design.ExpressionTranslation.TranslationResults.Output">
+      <summary>The translated xaml (a xaml where all the VB/C# expressions have been translated to trees of trusted activities)</summary>
+      <returns>Gets the translated xaml.</returns>
+    </member>
+    <member name="T:Microsoft.Activities.Design.PropertyEditors.ArgumentCollectionPropertyEditor">
+      <summary>Represents the property editor for the collection of argument.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.ArgumentCollectionPropertyEditor.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Activities.Design.PropertyEditors.ArgumentCollectionPropertyEditor" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.ArgumentCollectionPropertyEditor.ShowDialog(System.Activities.Presentation.PropertyEditing.PropertyValue,System.Windows.IInputElement)">
+      <summary>Shows the property editor dialog.</summary>
+      <param name="propertyValue">The property value to edit.</param>
+      <param name="commandSource">The command source object for basic input processing.</param>
+    </member>
+    <member name="T:Microsoft.Activities.Design.PropertyEditors.ArgumentDictionaryPropertyEditor">
+      <summary>Property editor for editing dictionary argument.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.ArgumentDictionaryPropertyEditor.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Activities.Design.PropertyEditors.ArgumentDictionaryPropertyEditor" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.ArgumentDictionaryPropertyEditor.ShowDialog(System.Activities.Presentation.PropertyEditing.PropertyValue,System.Windows.IInputElement)">
+      <summary>Shows the property editor dialog.</summary>
+      <param name="propertyValue">The property value to edit.</param>
+      <param name="commandSource">The command source object for basic input processing.</param>
+    </member>
+    <member name="T:Microsoft.Activities.Design.PropertyEditors.DictionaryPropertyEditor">
+      <summary>Property editor for editing dictionary attributes.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.DictionaryPropertyEditor.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Activities.Design.PropertyEditors.DictionaryPropertyEditor" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.DictionaryPropertyEditor.ShowDialog(System.Activities.Presentation.PropertyEditing.PropertyValue,System.Windows.IInputElement)">
+      <summary>Shows the property editor dialog.</summary>
+      <param name="propertyValue">The property value to edit.</param>
+      <param name="commandSource">The command source object for basic input processing. </param>
+    </member>
+    <member name="T:Microsoft.Activities.Design.PropertyEditors.InArgumentDynamicValuePropertyEditor">
+      <summary>Represents a property editor for editing dynamic value.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.InArgumentDynamicValuePropertyEditor.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Activities.Design.PropertyEditors.InArgumentDynamicValuePropertyEditor" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Activities.Design.PropertyEditors.InArgumentDynamicValuePropertyEditor.ShowDialog(System.Activities.Presentation.PropertyEditing.PropertyValue,System.Windows.IInputElement)">
+      <summary>Shows the property editor dialog.</summary>
+      <param name="propertyValue">The property value to edit.</param>
+      <param name="commandSource">The command source object for basic input processing.</param>
+    </member>
+  </members>
+</doc>

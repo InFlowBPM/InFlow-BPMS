@@ -1,0 +1,26 @@
+﻿@model strICT.InFlow.Db.Contracts.InFlow.WS_Folder
+
+
+@using (Html.BeginForm("EditFolder", "Project", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Hidden("Id", Model.Id)
+    @Html.Hidden("Parent_Id", Model.Parent_Id)
+    @Html.AntiForgeryToken()
+
+    <h4>Edit Folder</h4>
+    if (Model.Parent != null)
+    {
+        <h5>Parent: @Model.Parent.Name</h5>
+    }
+    @Html.ValidationSummary(true)
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Name, new { @class = "col-md-2 control-label" })
+
+        @Html.TextBoxFor(model => Model.Name, new { @class = "form-control" })
+
+    </div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-default">Save changes</button>
+        @Html.ActionLink("Cancel", "Index", new { id = -1 }, new { @class = "btn btn-default" })
+    </div>
+}

@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<strICT.InFlow.Web.Models.UserAdministration.UserViewModel>
+
+@{
+    ViewBag.Title = "Rights";
+}
+
+<div class="page-header"> <h1><small>Administration</small><br />Users&Rights</h1></div>
+
+<div class="row">
+    <div class="col-md-12 text-right">
+        @Html.ActionLink("Create New User", "Rights_User_New", new { } , new { @class = "btn btn-default" })
+    </div>
+</div>
+   
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>@Html.DisplayNameFor(model => model.AssignedRoles)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.NotAssignedRoles)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.Raw("| ")
+                @foreach (var role in item.AssignedRoles)
+                {
+                    @Html.Raw(role + " ")
+                    <a href="@Url.Action("Rights_RemoveRoleFromUser", new { id = item.Id, role = role })" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-minus"></span></a>
+                    @Html.Raw(" | ")
+                }
+            </td>
+            <td>
+                @Html.Raw("| ")
+                @foreach (var role in item.NotAssignedRoles)
+                {
+                    @Html.Raw(role + " ")
+                    <a href="@Url.Action("Rights_AddRoleToUser", new { id = item.Id, role = role })" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></a>
+                    @Html.Raw(" | ")
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Set Password", "Rights_User_SetPassword", new { id = item.Id }, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Delete", "Rights_DeleteUser", new { id = item.Id }, new { @class = "btn btn-default btn-xs" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

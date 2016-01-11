@@ -1,0 +1,221 @@
+﻿<Activity xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:siwas="clr-namespace:strICT.InFlow.WF.Activities.Supporting;assembly=InFlow_WF" xmlns:siwas1="clr-namespace:strICT.InFlow.WF.Activities.SBPM;assembly=InFlow_WF" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="strICT.InFlowTest.WFProcesses.Business Rule.Employee">
+    <Flowchart>
+        <Flowchart.Variables>
+            <Variable x:TypeArguments="x:String" x:Name="__ReferenceID2" Name="GlobalTransition" />
+            <Variable x:TypeArguments="p:DynamicValue" x:Name="__ReferenceID0" Name="GlobalVariables" />
+            <Variable x:TypeArguments="x:String" x:Name="__ReferenceID1" Default="{}{&quot;item number&quot;:{&quot;Type&quot;:&quot;string&quot;,&quot;Value&quot;:&quot;0&quot;},&quot;amount&quot;:{&quot;Type&quot;:&quot;number&quot;,&quot;Value&quot;:0},&quot;Price (Total)&quot;:{&quot;Type&quot;:&quot;number&quot;,&quot;Value&quot;:0},&quot;Order Number&quot;:{&quot;Type&quot;:&quot;string&quot;,&quot;Value&quot;:&quot;0&quot;},&quot;Delivery Date&quot;:{&quot;Type&quot;:&quot;string&quot;,&quot;Value&quot;:&quot;0&quot;},&quot;Reason&quot;:{&quot;Type&quot;:&quot;string&quot;,&quot;Value&quot;:&quot;0&quot;}}" Name="GlobalVariablesSchema" />
+        </Flowchart.Variables>
+        <Flowchart.StartNode>
+            <FlowStep>
+                <siwas:InitializeGlobalParameters DisplayName="init GP">
+                    <siwas:InitializeGlobalParameters.DynamicVal>
+                        <InOutArgument x:TypeArguments="p:DynamicValue">
+                            <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                        </InOutArgument>
+                    </siwas:InitializeGlobalParameters.DynamicVal>
+                    <siwas:InitializeGlobalParameters.GlobalParameterSchema>
+                        <InArgument x:TypeArguments="x:String">
+                            <VariableValue x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID1}" />
+                        </InArgument>
+                    </siwas:InitializeGlobalParameters.GlobalParameterSchema>
+                </siwas:InitializeGlobalParameters>
+                <FlowStep.Next>
+                    <FlowStep>
+                        <siwas1:ReceiveStateT DisplayName="Receive Order" OrderId="1" isEndState="False" messages="Customer|Order" name="Receive Order">
+                            <siwas1:ReceiveStateT.GlobalTransition>
+                                <OutArgument x:TypeArguments="x:String">
+                                    <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                </OutArgument>
+                            </siwas1:ReceiveStateT.GlobalTransition>
+                            <siwas1:ReceiveStateT.GlobalVariables>
+                                <InOutArgument x:TypeArguments="p:DynamicValue">
+                                    <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                </InOutArgument>
+                            </siwas1:ReceiveStateT.GlobalVariables>
+                            <siwas1:ReceiveStateT.TimeOut>
+                                <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                            </siwas1:ReceiveStateT.TimeOut>
+                        </siwas1:ReceiveStateT>
+                        <FlowStep.Next>
+                            <FlowStep>
+                                <siwas1:FunctionStateT DisplayName="Check Order" OrderId="2" isEndState="False" name="Check Order" readableParameters="item number,amount,Price (Total)" transitions="Price (Total) &gt; 9000,Confirm Order,Reject Order">
+                                    <siwas1:FunctionStateT.GlobalTransition>
+                                        <OutArgument x:TypeArguments="x:String">
+                                            <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                        </OutArgument>
+                                    </siwas1:FunctionStateT.GlobalTransition>
+                                    <siwas1:FunctionStateT.GlobalVariables>
+                                        <InOutArgument x:TypeArguments="p:DynamicValue">
+                                            <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                        </InOutArgument>
+                                    </siwas1:FunctionStateT.GlobalVariables>
+                                    <siwas1:FunctionStateT.TimeOut>
+                                        <InArgument x:TypeArguments="x:String">
+                                            <Literal x:TypeArguments="x:String" Value="" />
+                                        </InArgument>
+                                    </siwas1:FunctionStateT.TimeOut>
+                                    <siwas1:FunctionStateT.editableParameters>
+                                        <InArgument x:TypeArguments="x:String">
+                                            <Literal x:TypeArguments="x:String" Value="" />
+                                        </InArgument>
+                                    </siwas1:FunctionStateT.editableParameters>
+                                </siwas1:FunctionStateT>
+                                <FlowStep.Next>
+                                    <FlowSwitch x:TypeArguments="x:String">
+                                        <FlowSwitch.Expression>
+                                            <VariableValue x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                        </FlowSwitch.Expression>
+                                        <FlowStep x:Key="Price (Total) &gt; 9000">
+                                            <siwas1:SendStateT DisplayName="Forward to Supervisor" OrderId="3" isEndState="False" messageType="Order" name="Forward to Supervisor" parameters="item number,amount,Price (Total)" readableParameters="item number,amount,Price (Total)" toSubject="Supervisor">
+                                                <siwas1:SendStateT.GlobalTransition>
+                                                    <OutArgument x:TypeArguments="x:String">
+                                                        <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                    </OutArgument>
+                                                </siwas1:SendStateT.GlobalTransition>
+                                                <siwas1:SendStateT.GlobalVariables>
+                                                    <InOutArgument x:TypeArguments="p:DynamicValue">
+                                                        <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                                    </InOutArgument>
+                                                </siwas1:SendStateT.GlobalVariables>
+                                                <siwas1:SendStateT.TimeOut>
+                                                    <InArgument x:TypeArguments="x:String">
+                                                        <Literal x:TypeArguments="x:String" Value="" />
+                                                    </InArgument>
+                                                </siwas1:SendStateT.TimeOut>
+                                                <siwas1:SendStateT.editableParameters>
+                                                    <InArgument x:TypeArguments="x:String">
+                                                        <Literal x:TypeArguments="x:String" Value="" />
+                                                    </InArgument>
+                                                </siwas1:SendStateT.editableParameters>
+                                            </siwas1:SendStateT>
+                                            <FlowStep.Next>
+                                                <FlowStep>
+                                                    <siwas1:ReceiveStateT DisplayName="Wait for answer" OrderId="6" isEndState="False" messages="Supervisor|Order OK,Supervisor|Order Rejected" name="Wait for answer">
+                                                        <siwas1:ReceiveStateT.GlobalTransition>
+                                                            <OutArgument x:TypeArguments="x:String">
+                                                                <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                            </OutArgument>
+                                                        </siwas1:ReceiveStateT.GlobalTransition>
+                                                        <siwas1:ReceiveStateT.GlobalVariables>
+                                                            <InOutArgument x:TypeArguments="p:DynamicValue">
+                                                                <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                                            </InOutArgument>
+                                                        </siwas1:ReceiveStateT.GlobalVariables>
+                                                        <siwas1:ReceiveStateT.TimeOut>
+                                                            <InArgument x:TypeArguments="x:String">
+                                                                <Literal x:TypeArguments="x:String" Value="" />
+                                                            </InArgument>
+                                                        </siwas1:ReceiveStateT.TimeOut>
+                                                    </siwas1:ReceiveStateT>
+                                                    <FlowStep.Next>
+                                                        <FlowSwitch x:TypeArguments="x:String">
+                                                            <FlowSwitch.Expression>
+                                                                <VariableValue x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                            </FlowSwitch.Expression>
+                                                            <FlowStep x:Key="Supervisor|Order OK" x:Name="__ReferenceID4">
+                                                                <siwas1:SendStateT DisplayName="Send Confirmation" OrderId="5" editableParameters="Order Number,Delivery Date" isEndState="False" messageType="Confirmation" name="Send Confirmation" parameters="Order Number,Delivery Date" toSubject="Customer">
+                                                                    <siwas1:SendStateT.GlobalTransition>
+                                                                        <OutArgument x:TypeArguments="x:String">
+                                                                            <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                                        </OutArgument>
+                                                                    </siwas1:SendStateT.GlobalTransition>
+                                                                    <siwas1:SendStateT.GlobalVariables>
+                                                                        <InOutArgument x:TypeArguments="p:DynamicValue">
+                                                                            <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                                                        </InOutArgument>
+                                                                    </siwas1:SendStateT.GlobalVariables>
+                                                                    <siwas1:SendStateT.TimeOut>
+                                                                        <InArgument x:TypeArguments="x:String">
+                                                                            <Literal x:TypeArguments="x:String" Value="" />
+                                                                        </InArgument>
+                                                                    </siwas1:SendStateT.TimeOut>
+                                                                    <siwas1:SendStateT.readableParameters>
+                                                                        <InArgument x:TypeArguments="x:String">
+                                                                            <Literal x:TypeArguments="x:String" Value="" />
+                                                                        </InArgument>
+                                                                    </siwas1:SendStateT.readableParameters>
+                                                                </siwas1:SendStateT>
+                                                                <FlowStep.Next>
+                                                                    <FlowStep x:Name="__ReferenceID3">
+                                                                        <siwas1:FunctionStateT DisplayName="End" OrderId="7" isEndState="True" name="End">
+                                                                            <siwas1:FunctionStateT.GlobalTransition>
+                                                                                <OutArgument x:TypeArguments="x:String">
+                                                                                    <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                                                </OutArgument>
+                                                                            </siwas1:FunctionStateT.GlobalTransition>
+                                                                            <siwas1:FunctionStateT.GlobalVariables>
+                                                                                <InOutArgument x:TypeArguments="p:DynamicValue">
+                                                                                    <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                                                                </InOutArgument>
+                                                                            </siwas1:FunctionStateT.GlobalVariables>
+                                                                            <siwas1:FunctionStateT.TimeOut>
+                                                                                <InArgument x:TypeArguments="x:String">
+                                                                                    <Literal x:TypeArguments="x:String" Value="" />
+                                                                                </InArgument>
+                                                                            </siwas1:FunctionStateT.TimeOut>
+                                                                            <siwas1:FunctionStateT.editableParameters>
+                                                                                <InArgument x:TypeArguments="x:String">
+                                                                                    <Literal x:TypeArguments="x:String" Value="" />
+                                                                                </InArgument>
+                                                                            </siwas1:FunctionStateT.editableParameters>
+                                                                            <siwas1:FunctionStateT.readableParameters>
+                                                                                <InArgument x:TypeArguments="x:String">
+                                                                                    <Literal x:TypeArguments="x:String" Value="" />
+                                                                                </InArgument>
+                                                                            </siwas1:FunctionStateT.readableParameters>
+                                                                            <siwas1:FunctionStateT.transitions>
+                                                                                <InArgument x:TypeArguments="x:String">
+                                                                                    <Literal x:TypeArguments="x:String" Value="" />
+                                                                                </InArgument>
+                                                                            </siwas1:FunctionStateT.transitions>
+                                                                        </siwas1:FunctionStateT>
+                                                                    </FlowStep>
+                                                                </FlowStep.Next>
+                                                            </FlowStep>
+                                                            <FlowStep x:Key="Supervisor|Order Rejected" x:Name="__ReferenceID5" Next="{x:Reference __ReferenceID3}">
+                                                                <siwas1:SendStateT DisplayName="Send Rejection" OrderId="4" editableParameters="Reason" isEndState="False" messageType="Rejection" name="Send Rejection" parameters="Reason" toSubject="Customer">
+                                                                    <siwas1:SendStateT.GlobalTransition>
+                                                                        <OutArgument x:TypeArguments="x:String">
+                                                                            <VariableReference x:TypeArguments="x:String" Variable="{x:Reference __ReferenceID2}" />
+                                                                        </OutArgument>
+                                                                    </siwas1:SendStateT.GlobalTransition>
+                                                                    <siwas1:SendStateT.GlobalVariables>
+                                                                        <InOutArgument x:TypeArguments="p:DynamicValue">
+                                                                            <VariableReference x:TypeArguments="p:DynamicValue" Variable="{x:Reference __ReferenceID0}" />
+                                                                        </InOutArgument>
+                                                                    </siwas1:SendStateT.GlobalVariables>
+                                                                    <siwas1:SendStateT.TimeOut>
+                                                                        <InArgument x:TypeArguments="x:String">
+                                                                            <Literal x:TypeArguments="x:String" Value="" />
+                                                                        </InArgument>
+                                                                    </siwas1:SendStateT.TimeOut>
+                                                                    <siwas1:SendStateT.readableParameters>
+                                                                        <InArgument x:TypeArguments="x:String">
+                                                                            <Literal x:TypeArguments="x:String" Value="" />
+                                                                        </InArgument>
+                                                                    </siwas1:SendStateT.readableParameters>
+                                                                </siwas1:SendStateT>
+                                                            </FlowStep>
+                                                        </FlowSwitch>
+                                                    </FlowStep.Next>
+                                                </FlowStep>
+                                            </FlowStep.Next>
+                                        </FlowStep>
+                                        <x:Reference>__ReferenceID4
+                                            <x:Key>Confirm Order</x:Key>
+                                        </x:Reference>
+                                        <x:Reference>__ReferenceID5
+                                            <x:Key>Reject Order</x:Key>
+                                        </x:Reference>
+                                    </FlowSwitch>
+                                </FlowStep.Next>
+                            </FlowStep>
+                        </FlowStep.Next>
+                    </FlowStep>
+                </FlowStep.Next>
+            </FlowStep>
+        </Flowchart.StartNode>
+    </Flowchart>
+</Activity>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siwas:FunctionState xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:local="clr-namespace:strICT.InFlow.WF.Activities.Supporting;assembly=InFlow_WF" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mca="clr-namespace:Microsoft.CSharp.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:siwas="clr-namespace:strICT.InFlow.WF.Activities.SBPM;assembly=InFlow_WF" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>Microsoft.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>EntityFramework</AssemblyReference>
+      <AssemblyReference>EntityFramework.SqlServer</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.ServiceBus</AssemblyReference>
+      <AssemblyReference>Microsoft.Workflow.Client</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.DataAnnotations</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>InFlow_Db</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>InFlow_WF</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <siwas:FunctionState.Implementation>
+    <Sequence DisplayName="Function State">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="p:DynamicValue" Name="localData" />
+        <Variable x:TypeArguments="x:String" Name="GlobalWFId" />
+        <Variable x:TypeArguments="x:String" Name="cfgManagementScopeAddress" />
+        <Variable x:TypeArguments="x:String" Name="cfgProcessScopeAddress" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMUsername" />
+        <Variable x:TypeArguments="x:String" Name="cfgWFMPassword" />
+        <Variable x:TypeArguments="x:String" Name="cfgSQLConnectionString" />
+      </Sequence.Variables>
+      <Sequence DisplayName="Initialize State">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:Int32" Name="OrderId" />
+        </Sequence.Variables>
+        <local:InitializeDynamicValue>
+          <local:InitializeDynamicValue.DynamicVal>
+            <InOutArgument x:TypeArguments="p:DynamicValue">
+              <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+            </InOutArgument>
+          </local:InitializeDynamicValue.DynamicVal>
+        </local:InitializeDynamicValue>
+        <local:GetWorkflowInstanceId>
+          <local:GetWorkflowInstanceId.GlobalWFId>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">GlobalWFId</mca:CSharpReference>
+            </OutArgument>
+          </local:GetWorkflowInstanceId.GlobalWFId>
+        </local:GetWorkflowInstanceId>
+        <p:GetConfigurationValue Name="cfgManagementScopeAddress">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgManagementScopeAddress</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgProcessScopeAddress">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgProcessScopeAddress</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgWFMUsername">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgWFMPassword">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+        <p:GetConfigurationValue Name="cfgSQLConnectionString">
+          <p:GetConfigurationValue.Result>
+            <OutArgument x:TypeArguments="x:String">
+              <mca:CSharpReference x:TypeArguments="x:String">cfgSQLConnectionString</mca:CSharpReference>
+            </OutArgument>
+          </p:GetConfigurationValue.Result>
+        </p:GetConfigurationValue>
+      </Sequence>
+      <local:CreateFunctionTask>
+        <local:CreateFunctionTask.Name>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">name</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.Name>
+        <local:CreateFunctionTask.OrderId>
+          <InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.OrderId>
+        <local:CreateFunctionTask.cfgManagementScopeAddress>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgManagementScopeAddress</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.cfgManagementScopeAddress>
+        <local:CreateFunctionTask.cfgWFMPassword>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMPassword</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.cfgWFMPassword>
+        <local:CreateFunctionTask.cfgWFMUsername>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">cfgWFMUsername</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.cfgWFMUsername>
+        <local:CreateFunctionTask.editableParameters>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">editableParameters</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.editableParameters>
+        <local:CreateFunctionTask.globalVariables>
+          <InArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpValue x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.globalVariables>
+        <local:CreateFunctionTask.globalWFId>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.globalWFId>
+        <local:CreateFunctionTask.isEndState>
+          <InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">isEndState</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.isEndState>
+        <local:CreateFunctionTask.readableParameters>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">readableParameters</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.readableParameters>
+        <local:CreateFunctionTask.transitions>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">transitions</mca:CSharpValue>
+          </InArgument>
+        </local:CreateFunctionTask.transitions>
+      </local:CreateFunctionTask>
+      <local:ReceiveTaskAnswer DisplayName="ReceiveTaskAnswer" NotificationType="taskAnswer">
+        <local:ReceiveTaskAnswer.Data>
+          <OutArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpReference x:TypeArguments="p:DynamicValue">localData</mca:CSharpReference>
+          </OutArgument>
+        </local:ReceiveTaskAnswer.Data>
+        <local:ReceiveTaskAnswer.OrderId>
+          <InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">OrderId</mca:CSharpValue>
+          </InArgument>
+        </local:ReceiveTaskAnswer.OrderId>
+        <local:ReceiveTaskAnswer.wfID>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">GlobalWFId</mca:CSharpValue>
+          </InArgument>
+        </local:ReceiveTaskAnswer.wfID>
+      </local:ReceiveTaskAnswer>
+      <local:WriteData>
+        <local:WriteData.Data>
+          <InArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpValue x:TypeArguments="p:DynamicValue">localData</mca:CSharpValue>
+          </InArgument>
+        </local:WriteData.Data>
+        <local:WriteData.GlobalTransition>
+          <OutArgument x:TypeArguments="x:String">
+            <mca:CSharpReference x:TypeArguments="x:String">GlobalTransition</mca:CSharpReference>
+          </OutArgument>
+        </local:WriteData.GlobalTransition>
+        <local:WriteData.GlobalVariables>
+          <InOutArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpReference x:TypeArguments="p:DynamicValue">GlobalVariables</mca:CSharpReference>
+          </InOutArgument>
+        </local:WriteData.GlobalVariables>
+      </local:WriteData>
+      <sads:DebugSymbol.Symbol>9xCVXhYJ1LHJM5U9i+xJ3sBkZ0M6XFVzZXJzXHN0ZWZhblxTb3VyY2VcV29ya3NwYWNlc1xTdHJJQ1RcSW5GbG93MjAxNFxJbkZsb3dcSW5GbG93X1dGXEFjdGl2aXRpZXNcU0JQTVxGdW5jdGlvblN0YXRlLnhhbWwlPAPYAQ4CAQFGBXsQAwGWAnwFtAEgAgFltQEFxQEfAgEzxgEF1gEXAgECSgdQJgMBgwNRB1clAwHxAlgHXiEDAd8CXwdlIQMBzQJmB2whAwG7Am0HcyEDAakCdAd6IQMBlwKxAQuxAVQDAYYCjgELjgFXAwH2AZMBC5MBVwMB5gGdAQudAV4DAdYBogELogFTAwHGAawBC6wBWwMBtgGEAQuEAU8DAaYBpwELpwFUAwGWAZgBC5gBWwMBhgF/C39NAgF2iQELiQFiAgFmwgELwgFTAgFVtQGFAbUBkQECAVS4AQu4AWACAUS9AQu9AU8CATTOAQvOAWECASPTAQvTAWYCARPJAQvJAVgCAQNNDU1oAwGEA1QNVF0DAfICWw1bbAMB4AJiDWJpAwHOAmkNaWEDAbwCcA1wYQMBqgJ3DXdpAwGYAg==</sads:DebugSymbol.Symbol>
+    </Sequence>
+  </siwas:FunctionState.Implementation>
+</siwas:FunctionState>

@@ -1,0 +1,115 @@
+﻿@model strICT.InFlow.Web.Models.JobsViewModels.SendTaskViewModel
+
+@using (Html.BeginForm("_SendState", "Jobs", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @Model.ProcessName @Html.Raw("(v." + Model.Version + ") : ") @Model.Name
+            @if (Model.Done)
+            {
+                if (Model.Timedout)
+                { @Html.Raw("TIMEOUT") }
+                else
+                { @Html.Raw(" DONE ") }
+            }
+        </div>
+        <div class="panel-body">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ToMultiSubject)
+            @Html.HiddenFor(model => model.ViewMode)
+            Information:
+            <ul>
+                <li>Process started by @Model.StartedByUser on @Model.ProcessStartDate</li>
+                @if (Model.Done)
+                {
+                    <li>Task submitted on @Model.TaskCreatedDate</li>
+                }
+                else
+                {
+                    <li>Task created on @Model.TaskCreatedDate</li>
+                }
+                @if (Model.Timedout)
+                {
+                    <li>Time out occurred on @Model.DoneDate</li>
+                }
+                @if (Model.Done & !Model.Timedout)
+                {
+                    <li>Process ended</li>
+                }
+            </ul>
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        Recipient(s)
+                    </td>
+                    <td>
+                        @if (Model.Done)
+                        {
+                            @Model.selectedRecipient
+                        }
+                        else
+                        {
+                            if (Model.ToMultiSubject)
+                            {
+                                @Html.HiddenFor(model => model.selectedRecipient)
+                                <table class="table table-striped">
+                                    @foreach (var item in Model.Recipients)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @{ var optionValue = "User_" + item.Value; }
+                                                <input type="checkbox"
+                                                       id="@optionValue"
+                                                       name="SelectedUsers"
+                                                       value="@item.Value" />
+                                                <label for="@optionValue">@item.Value</label>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.selectedRecipient, Model.Recipients, new { @class = "form-control" })
+                            }
+                        }
+                    </td>
+                </tr>
+                @foreach (var item in Model.ReadableParameters)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @if (item.Type.Equals("bobasic"))
+                            {
+                                <a href="#" class="btn btn-default" onclick="showBO('@Url.Action("BusinessObject", "BusinessObject", new { id = item.Value.boi, taskId = ViewBag.TaskId })')">View</a>     }
+                            else
+                            {
+                                @item.Value
+                            }
+                        </td>
+                    </tr>
+                }
+                @Html.EditorFor(model => model.EditableParameters)
+            </table>
+        </div>
+
+        <div class="panel-footer text-right">
+            @if (!Model.Done)
+            {
+                <input type="submit" value="Send" class="btn btn-default" />
+            }
+            else if (!Model.Seen)
+            {
+                @Html.ActionLink("Task Seen", "SetStateAsSeen", new { id = Model.Id, mode = Model.ViewMode }, new { @class = "btn btn-default" })
+            }
+        </div>
+
+    </div>
+}

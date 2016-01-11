@@ -1,0 +1,44 @@
+﻿@model IEnumerable<strICT.InFlow.Db.Contracts.InFlow.WS_Folder>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <span class="glyphicon glyphicon-folder-open"></span> @item.Name |
+            @Html.ActionLink(" ", "DeleteFolder", new { folderId = item.Id }, new { @class = "glyphicon glyphicon-remove" ,@title="delete folder" }) |
+            @Ajax.ActionLink(" ", "_EditFolder", new { folderId = item.Id }, new AjaxOptions { UpdateTargetId = "folderdiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-pencil", @title = "rename folder" }) |
+            @Ajax.ActionLink(" ", "_CreateFolder", new { folderId = item.Id }, new AjaxOptions { UpdateTargetId = "folderdiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-plus", @title="create new subfolder" }) |
+            @Ajax.ActionLink(" ", "_CreateProject", new { folderId = item.Id }, new AjaxOptions { UpdateTargetId = "folderdiv", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-new-window", @title= "create new project" }) |
+            @if (item.Projects.Count() > 0)
+            {
+                <ul>
+                    @foreach (var child in item.Projects)
+                    {
+                        if (child.Deleted == false)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-file"></span>
+                                @Ajax.ActionLink(@child.Name, "_ProjectWorkspace", new { projectId = child.Id }, new AjaxOptions { UpdateTargetId = "pworkspace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }) |
+                                @Html.ActionLink(" ", "DeleteProject", new { projectId = child.Id }, new { @class = "glyphicon glyphicon-remove", @title="delete project" }) |
+
+                            </li>
+                        }
+                        if (User.IsInRole("CompanyAdmin") & child.Deleted == true)
+                        {
+                            <li>
+                                <span class="glyphicon glyphicon-file"></span>
+                                @Ajax.ActionLink(@child.Name, "_ProjectWorkspace", new { projectId = child.Id }, new AjaxOptions { UpdateTargetId = "pworkspace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { style = "text-decoration: line-through" })|
+                                @Html.ActionLink(" ", "DeleteProjectFull", new { projectId = child.Id }, new { @class = "glyphicon glyphicon-remove", style = "color: red", @title = "permanently delete project" }) |
+
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+        </li>
+        if (item.Children.Count > 0)
+        {
+            @Html.Partial("_Folders", item.Children);
+        }
+
+    }
+</ul>

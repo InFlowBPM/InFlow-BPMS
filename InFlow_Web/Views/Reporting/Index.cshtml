@@ -1,0 +1,40 @@
+﻿@model IEnumerable<strICT.InFlow.Web.Models.ProcessOverviewViewModel>
+
+
+<div class="page-header"> <h1><small>Reporting</small><br />Server Status</h1></div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Version</th>
+                <th>Info</th>
+                <th>InstancesTotal</th>
+                <th>InstancesCompleted</th>
+                <th>InstancesRunning</th>
+                <th>AverageCycleTime</th>
+                <th>MinCycleTime</th>
+                <th>MaxCycleTime</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@Html.ActionLink(item.Name,"ProcessDetails",new {id = item.Id})</td>
+                    <td>@item.Version</td>
+                    <td>@item.Info</td>
+                    <td>@item.InstancesTotal</td>
+                    <td>@item.InstancesCompleted</td>
+                    <td>@item.InstancesRunning</td>
+                    <td>@item.AverageCycleTime.ToString(@"d\d\ hh\:mm\:ss")</td>
+                    <td>@item.MinCycleTime.ToString(@"d\d\ hh\:mm\:ss")</td>
+                    <td>@item.MaxCycleTime.ToString(@"d\d\ hh\:mm\:ss")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

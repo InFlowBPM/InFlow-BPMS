@@ -1,0 +1,2 @@
+SendStateT.g.xaml
+XamlStaticHelperNamespace._XamlStaticHelper

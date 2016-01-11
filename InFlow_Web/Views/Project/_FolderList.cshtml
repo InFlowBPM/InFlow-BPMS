@@ -1,0 +1,28 @@
+﻿@{
+    var c = new strICT.InFlow.Web.Controllers.ProjectController();
+    
+}
+
+    @Html.Partial("_Folders", c.RootFolders())
+
+<p >    @Ajax.ActionLink("New Folder", "_CreateFolder", new { folderId = -1 }, new AjaxOptions
+               {
+                   UpdateTargetId = "folderdiv",
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "GET"
+               }, new { @class = "btn btn-default" , @title="create new root-folder"})
+    
+    </p>
+<p>
+    @Ajax.ActionLink("Import BPMN", "_ImportBPMN",new {}, new AjaxOptions
+               {
+                   UpdateTargetId = "folderdiv",
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "GET"
+               }, new { @class = "btn btn-default", @title = "create new root-folder" })
+
+</p>
+<div id="folderdiv">
+
+</div>
+
